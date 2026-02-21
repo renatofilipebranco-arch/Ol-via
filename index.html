@@ -1,805 +1,251 @@
 <!doctype html>
 <html lang="pt-PT">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Batizado da Olívia — 02 de junho de 2026</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Batizado da Olívia</title>
 
-  <meta property="og:title" content="Batizado da Olívia — 02 de junho de 2026" />
-  <meta property="og:description" content="Convite para o Batizado da nossa querida Olívia. Cerimónia 11h30 · Igreja Matriz de Tentúgal. Celebração em Patinhos." />
-  <meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --sage:#91a88d;
+ --blush:#f4d6dd;
+ --ink:#1f2a22;
+}
 
-  <style>
-    :root{
-      --sage:#91a88d;
-      --blush:#f4d6dd;
-      --blush2:#f9e7eb;
-      --ink:#1f2a22;
-      --muted:#5b6b60;
+*{box-sizing:border-box;}
+html,body{
+ margin:0;
+ height:100%;
+ overflow:hidden;
+ font-family:'Inter',sans-serif;
+ background:linear-gradient(180deg,#fff,#f8f8f6);
+ color:var(--ink);
+}
 
-      --card: rgba(255,255,255,.80);
-      --glass: rgba(255,255,255,.64);
-      --border: rgba(145,168,141,.30);
-      --shadow: 0 16px 50px rgba(18,25,20,.10);
-      --radius: 22px;
-    }
+.page{
+ position:absolute;
+ inset:0;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:40px 25px;
+ opacity:0;
+ filter:blur(12px);
+ transform:scale(.97);
+ transition:opacity .8s ease,filter .8s ease,transform .8s ease;
+}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      color:var(--ink);
-      background:
-        radial-gradient(1100px 800px at 15% 10%, rgba(145,168,141,.16), transparent 55%),
-        radial-gradient(900px 650px at 95% 25%, rgba(244,214,221,.35), transparent 58%),
-        radial-gradient(1200px 900px at 60% 120%, rgba(249,231,235,.55), transparent 55%),
-        linear-gradient(180deg, #fff, #f6f7f5);
-      position:relative;
-      overflow:hidden; /* paging */
-      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
+.page.active{
+ opacity:1;
+ filter:blur(0);
+ transform:scale(1);
+}
 
-    /* textura subtil tipo papel */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background:
-        repeating-radial-gradient(circle at 10% 10%,
-          rgba(0,0,0,.016) 0 1px,
-          rgba(0,0,0,0) 1px 6px);
-      mix-blend-mode:multiply;
-      opacity:.55;
-    }
+h1{
+ font-family:'Allura',cursive;
+ font-size:clamp(48px,8vw,90px);
+ color:var(--sage);
+ margin:0;
+}
 
-    /* ======= PAGING ======= */
-    .app{
-      position:relative;
-      height:100%;
-      width:100%;
-    }
-    .page{
-      filter: blur(8px);
-      transform: translateY(20px) scale(.985);
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 26px 18px;
-      opacity:0;
-      transform: translateY(10px);
-      pointer-events:none;
-      transition: opacity .85s ease, transform .85s ease, filter .85s ease;
-    }
-    .page.active{
-      filter: blur(0px);
-      transform: translateY(0) scale(1);
-      opacity:1;
-      transform: translateY(0);
-      pointer-events:auto;
-    }
+h2{
+ font-weight:500;
+ letter-spacing:.1em;
+ text-transform:uppercase;
+ font-size:14px;
+ margin-bottom:20px;
+ color:rgba(0,0,0,.5);
+}
 
-    .wrap{
-      width: min(980px, 100%);
-      margin:0 auto;
-    }
+.text{
+ max-width:700px;
+ font-size:18px;
+ line-height:1.7;
+}
 
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+.watermark{
+ position:absolute;
+ inset:0;
+ background:url('pomba.webp') no-repeat center 20%;
+ background-size:400px;
+ opacity:.15;
+ pointer-events:none;
+}
 
-    header.hero{
-      padding: 30px 22px 22px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
+.countdown{
+ display:flex;
+ gap:18px;
+ margin-top:20px;
+ font-size:22px;
+}
 
-    .kicker{
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: rgba(91,107,96,.9);
-      font-size: 12px;
-      letter-spacing: .26em;
-      text-transform: uppercase;
-      margin: 4px 0 12px;
-    }
+.countdown div{
+ padding:12px 16px;
+ border-radius:14px;
+ background:rgba(145,168,141,.1);
+}
 
-    h1{
-      margin: 0;
-      font-family: "Allura", cursive;
-      font-size: clamp(54px, 7vw, 92px);
-      line-height: 1.02;
-      color: var(--sage);
-      letter-spacing: .2px;
-    }
+.btnRow{
+ margin-top:25px;
+ display:flex;
+ gap:15px;
+}
 
-    .date{
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 18px;
-      letter-spacing:.3px;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+.btn{
+ padding:14px 20px;
+ border-radius:14px;
+ text-decoration:none;
+ color:#000;
+ font-weight:500;
+}
 
-    .divider{
-      width: 140px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(244,214,221,.95), rgba(145,168,141,.75), transparent);
-      margin: 18px auto 0;
-      border-radius: 99px;
-    }
+.pai{background:rgba(145,168,141,.3);}
+.mae{background:rgba(244,214,221,.7);}
 
-    .section{ padding: 22px; }
-    .section h2{
-      margin: 0 0 10px;
-      font-weight: 600;
-      font-size: 22px;
-      color: var(--ink);
-      letter-spacing:.2px;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+.nav{
+ position:fixed;
+ bottom:15px;
+ left:0;
+ right:0;
+ display:flex;
+ justify-content:center;
+ gap:20px;
+}
 
-    /* ======= Mensagem watermark ======= */
-    .messageCard{ position:relative; overflow:hidden; }
-    .messageCard::before{
-      content:"";
-      position:absolute;
-      inset:-12% -12%;
-      background-image: url('pomba.webp');
-      background-size: min(420px, 78vw) auto;
-      background-repeat: no-repeat;
-      background-position: 86% 16%;
-      opacity: .22;
-      pointer-events:none;
-      transform: rotate(-7deg);
-      filter: saturate(1.02) contrast(1.02);
-    }
-    @supports not (background-image: url('pomba.webp')){
-      .messageCard::before{ background-image:url('pomba.png'); }
-    }
-    .messageCard > *{ position:relative; z-index:1; }
-    .message p{
-      margin:0;
-      font-size: 18px;
-      line-height: 1.68;
-      color: #233027;
-    }
-    @media (max-width:520px){
-      .message p{ font-size: 17.2px; }
-    }
+.arrow{
+ border:none;
+ background:rgba(0,0,0,.05);
+ width:36px;
+ height:36px;
+ border-radius:50%;
+ cursor:pointer;
+ font-size:16px;
+}
 
-    /* ======= Pills / info ======= */
-    .infoRow{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 6px;
-    }
-    .pill{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.58)),
-        radial-gradient(500px 260px at 10% 10%, rgba(244,214,221,.35), transparent 60%),
-        radial-gradient(540px 300px at 90% 40%, rgba(145,168,141,.20), transparent 60%);
-      border: 1px solid rgba(145,168,141,.26);
-      border-radius: 18px;
-      padding: 14px 14px;
-    }
-    .pill .label{
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing:.24em;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .pill .value{
-      font-size: 18px;
-      line-height: 1.35;
-      color: #1f2a22;
-      font-weight: 500;
-    }
-    .timePlace{ display:grid; gap: 10px; }
-    .timePlace strong{ font-weight: 600; color: #1e2a21; }
+.cloud{
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.95),rgba(255,255,255,.7)),
+            radial-gradient(circle at 60% 50%,rgba(255,255,255,.8),transparent 60%);
+ z-index:9999;
+ transition:opacity 2s ease;
+}
 
-    /* ======= Countdown (mais alinhado com o convite) ======= */
-    .countdown{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .cdBox{
-      text-align:center;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.56)),
-        radial-gradient(240px 150px at 20% 20%, rgba(244,214,221,.48), transparent 62%),
-        radial-gradient(240px 150px at 85% 25%, rgba(145,168,141,.18), transparent 62%);
-      border: 1px solid rgba(145,168,141,.22);
-      border-radius: 18px;
-      padding: 14px 10px;
-      box-shadow: 0 10px 22px rgba(18,25,20,.06);
-    }
-    .cdBox .num{
-      font-size: 30px;
-      font-weight: 650;
-      color: #1f2a22;
-      letter-spacing:.3px;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    .cdBox .txt{
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing:.26em;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-
-    /* ======= Botões ======= */
-    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-    .btn{
-      appearance:none;
-      border: 1px solid rgba(145,168,141,.42);
-      background: white;
-      color: #1f2a22;
-      padding: 12px 14px;
-      border-radius: 16px;
-      font-size: 15.5px;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      box-shadow: 0 10px 22px rgba(18,25,20,.08);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      min-width: 170px;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(145,168,141,.75);
-      box-shadow: 0 16px 30px rgba(18,25,20,.10);
-    }
-    .btn.pai{
-      background: linear-gradient(180deg, rgba(145,168,141,.28), rgba(145,168,141,.10));
-      border-color: rgba(145,168,141,.55);
-    }
-    .btn.mae{
-      background: linear-gradient(180deg, rgba(244,214,221,.62), rgba(244,214,221,.18));
-      border-color: rgba(244,214,221,.95);
-    }
-    .btn.map{
-      background: linear-gradient(180deg, rgba(145,168,141,.18), rgba(145,168,141,.08));
-    }
-
-    /* ======= Navegação (indicador / botões) ======= */
-    .nav{
-      position:fixed;
-      left:0; right:0;
-      bottom: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      z-index: 20;
-      pointer-events:none;
-    }
-    .navInner{
-      pointer-events:auto;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(145,168,141,.22);
-      border-radius: 999px;
-      box-shadow: 0 12px 30px rgba(18,25,20,.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .dot{
-      width: 8px; height: 8px; border-radius: 99px;
-      border: 1px solid rgba(145,168,141,.35);
-      background: rgba(255,255,255,.55);
-      transition: transform .2s ease, background .2s ease;
-    }
-    .dot.on{ background: rgba(145,168,141,.55); transform: scale(1.18); }
-    .navBtn{
-      border:none;
-      background: transparent;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size: 14px;
-      color: rgba(31,42,34,.82);
-      padding: 6px 10px;
-      border-radius: 999px;
-      cursor:pointer;
-      transition: background .15s ease;
-    }
-    .navBtn:hover{ background: rgba(244,214,221,.35); }
-    .hint{
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing:.12em;
-      text-transform: uppercase;
-      color: rgba(91,107,96,.88);
-      padding-left: 2px;
-      display:none;
-    }
-    @media (max-width:520px){
-      .hint{ display:block; }
-    }
-
-    /* ======= Nuvem overlay (mais intensa) ======= */
-    .cloudOverlay{
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display:grid;
-      place-items:center;
-      background:
-        radial-gradient(1100px 780px at 50% 35%, rgba(255,255,255,.99), rgba(255,255,255,.84)),
-        radial-gradient(900px 600px at 30% 85%, rgba(244,214,221,.35), transparent 60%);
-      overflow:hidden;
-    }
-    .cloudStage{
-      width: min(920px, 92vw);
-      aspect-ratio: 16/9;
-      position:relative;
-      filter: drop-shadow(0 30px 54px rgba(18,25,20,.14));
-    }
-    canvas#fog{
-      width:100%;
-      height:100%;
-      display:block;
-      border-radius: 34px;
-    }
-    .cloudOverlay.dissolve{
-      animation: overlayFade 1.9s ease forwards;
-    }
-    .cloudOverlay.dissolve .cloudStage{
-      animation: stageLift 1.9s ease forwards;
-    }
-    @keyframes overlayFade{ to{ opacity:0; visibility:hidden; } }
-    @keyframes stageLift{
-      to{
-        transform: translateY(-10px) scale(1.04);
-        filter: blur(10px) drop-shadow(0 30px 54px rgba(18,25,20,0));
-        opacity: 0;
-      }
-    }
-
-    /* Acessibilidade */
-    @media (prefers-reduced-motion: reduce){
-      .page{
-      filter: blur(8px);
-      transform: translateY(20px) scale(.985); transition:none; }
-      .cloudOverlay, .cloudStage{ animation:none !important; }
-    }
-  </style>
+.cloud.hide{opacity:0;pointer-events:none;}
+</style>
 </head>
 
 <body>
-  <!-- Nuvem inicial -->
-  <div class="cloudOverlay" id="cloud">
-    <div class="cloudStage" aria-hidden="true">
-      <canvas id="fog" width="1280" height="720"></canvas>
-    </div>
-  </div>
 
-  <div class="app" id="app" aria-live="polite">
-    <!-- Página 1: Convite -->
-    <section class="page active" data-page="0" aria-label="Convite">
-      <div class="wrap">
-        <header class="hero card">
-          <div class="kicker">Convite</div>
-          <h1>Batizado da Olívia</h1>
-          <p class="date">02 de junho de 2026</p>
-          <div class="divider"></div>
-        </header>
-      </div>
-    </section>
+<div class="cloud" id="cloud"></div>
 
-    <!-- Página 2: Mensagem -->
-    <section class="page" data-page="1" aria-label="Mensagem">
-      <div class="wrap">
-        <div class="section card messageCard">
-          <h2>Mensagem</h2>
-          <div class="message">
-            <p>
-              É com o coração cheio de alegria, que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
-              Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
-              A vossa presença tornará este dia ainda mais especial, por isso contamos convosco! 🤍
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="page active" id="p0">
+<h1>Batizado da Olívia</h1>
+<p>02 de junho de 2026</p>
+</div>
 
-    <!-- Página 3: Detalhes -->
-    <section class="page" data-page="2" aria-label="Detalhes">
-      <div class="wrap">
-        <div class="section card">
-          <h2>Detalhes</h2>
-          <div class="infoRow">
-            <div class="pill">
-              <div class="label">Cerimónia</div>
-              <div class="value timePlace">
-                <div><strong>11h30</strong></div>
-                <div>Igreja Matriz de Tentúgal</div>
-              </div>
-              <div class="btnRow">
-                <a class="btn map" id="mapIgreja" href="#" target="_blank" rel="noopener">Google Maps</a>
-              </div>
-            </div>
+<div class="page" id="p1">
+<div class="watermark"></div>
+<div class="text">
+É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
+Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
+A vossa presença tornará este dia ainda mais especial 🤍
+</div>
+</div>
 
-            <div class="pill">
-              <div class="label">Celebração</div>
-              <div class="value timePlace">
-                <div><strong>Almoço</strong></div>
-                <div>Patinhos</div>
-              </div>
-              <div class="btnRow">
-                <a class="btn map" id="mapPatinhos" href="#" target="_blank" rel="noopener">Google Maps</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="page" id="p2">
+<h2>Detalhes</h2>
+<div class="text">
+<strong>11h30</strong><br>
+Igreja Matriz de Tentúgal<br><br>
+<strong>Almoço</strong><br>
+Patinhos
+</div>
+</div>
 
-    <!-- Página 4: Confirmação + Countdown -->
-    <section class="page" data-page="3" aria-label="Confirmação de presença">
-      <div class="wrap">
-        <div class="section card">
-          <h2>Confirmação de presença</h2>
+<div class="page" id="p3">
+<h2>Confirmação</h2>
+<div class="countdown">
+<div><span id="d">--</span>d</div>
+<div><span id="h">--</span>h</div>
+<div><span id="m">--</span>m</div>
+<div><span id="s">--</span>s</div>
+</div>
+<div class="btnRow">
+<a class="btn pai" id="btnPai" href="#">Confirmar com o Pai</a>
+<a class="btn mae" id="btnMae" href="#">Confirmar com a Mãe</a>
+</div>
+<p style="margin-top:15px;font-size:14px;">Confirma até 31 de Março</p>
+</div>
 
-          <div class="pill">
-            <div class="label">Contagem decrescente</div>
-            <div class="countdown" aria-label="Contagem decrescente">
-              <div class="cdBox"><div class="num" id="d">—</div><div class="txt">Dias</div></div>
-              <div class="cdBox"><div class="num" id="h">—</div><div class="txt">Horas</div></div>
-              <div class="cdBox"><div class="num" id="m">—</div><div class="txt">Min</div></div>
-              <div class="cdBox"><div class="num" id="s">—</div><div class="txt">Seg</div></div>
-            </div>
-          </div>
+<div class="nav">
+<button class="arrow" onclick="go(-1)">‹</button>
+<button class="arrow" onclick="go(1)">›</button>
+</div>
 
-          <div class="pill" style="margin-top:10px;">
-            <div class="label">WhatsApp</div>
-            <div class="btnRow">
-              <a class="btn pai" id="btnPai" href="#" target="_blank" rel="noopener">Confirmar com o Pai</a>
-              <a class="btn mae" id="btnMae" href="#" target="_blank" rel="noopener">Confirmar com a Mãe</a>
-            </div>
-          </div>
+<script>
+let index=0;
+const pages=document.querySelectorAll('.page');
+let autoTimer;
+let pauseUntil=0;
 
-          <p style="margin:12px 6px 0; color: rgba(31,42,34,.72); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; font-size:13px; letter-spacing:.02em;">
-            Confirma até <strong>31 de Março</strong>.
-          </p>
-        </div>
-      </div>
-    </section>
+function show(i){
+ pages[index].classList.remove('active');
+ index=(i+pages.length)%pages.length;
+ pages[index].classList.add('active');
+}
 
-    <!-- Navegação -->
-    <div class="nav" aria-hidden="false">
-      <div class="navInner">
-        <button class="navBtn" id="prevBtn" type="button">◀</button>
-        <div id="dots" style="display:flex; gap:8px;"></div>
-        <button class="navBtn" id="nextBtn" type="button">▶</button>
-        <span class="hint">Desliza</span>
-      </div>
-    </div>
-  </div>
+function go(step){
+ pauseUntil=Date.now()+45000;
+ show(index+step);
+}
 
-  <script>
-    /* ========= NUVEM “REAL” (mais intensa) ========= */
-    const cloud = document.getElementById('cloud');
-    const canvas = document.getElementById('fog');
-    const ctx = canvas.getContext('2d', { alpha: true });
+function auto(){
+ if(Date.now()>pauseUntil){
+   show(index+1);
+ }
+ autoTimer=setTimeout(auto,6000);
+}
+auto();
 
-    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+['pointerdown','wheel','touchstart','keydown'].forEach(e=>{
+ window.addEventListener(e,()=>pauseUntil=Date.now()+45000);
+});
 
-    function fitCanvas(){
-      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = Math.floor(rect.width * dpr);
-      canvas.height = Math.floor(rect.height * dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    window.addEventListener('resize', fitCanvas, { passive:true });
+// Cloud
+setTimeout(()=>{
+ document.getElementById('cloud').classList.add('hide');
+},2500);
 
-    function rand(a,b){ return a + Math.random()*(b-a); }
-    function isMobile(){ return Math.min(window.innerWidth, window.innerHeight) < 700; }
+// Countdown
+const target=new Date("2026-06-02T11:30:00");
+function tick(){
+ const now=new Date();
+ let diff=(target-now)/1000;
+ if(diff<0) diff=0;
+ const d=Math.floor(diff/86400);
+ const h=Math.floor(diff%86400/3600);
+ const m=Math.floor(diff%3600/60);
+ const s=Math.floor(diff%60);
+ document.getElementById('d').textContent=d;
+ document.getElementById('h').textContent=h;
+ document.getElementById('m').textContent=m;
+ document.getElementById('s').textContent=s;
+}
+setInterval(tick,1000);
+tick();
 
-    let puffs = [];
-    let dust = [];
-    let dissolving = false;
-    let dissolveStart = 0;
+// WhatsApp
+const msg=encodeURIComponent("Olá! Confirmo a presença no Batizado da Olívia. Confirma até 31 de Março.");
+document.getElementById('btnPai').href="https://wa.me/351915149673?text="+msg;
+document.getElementById('btnMae').href="https://wa.me/351914188636?text="+msg;
+</script>
 
-    function initFog(){
-      fitCanvas();
-      const rect = canvas.getBoundingClientRect();
-      const w = rect.width, h = rect.height;
-
-      // Mobile: ainda fluido, mas mais denso do que antes
-      const PUFFS = isMobile() ? 62 : 110;
-      const DUST  = isMobile() ? 120 : 240;
-
-      puffs = [];
-      for(let i=0;i<PUFFS;i++){
-        puffs.push({
-          x: rand(w*0.12, w*0.88),
-          y: rand(h*0.26, h*0.78),
-          r: rand(w*0.07, w*0.18),
-          vx: rand(-0.07, 0.07),
-          vy: rand(-0.02, 0.03),
-          a: rand(0.18, 0.36),     // mais opaco
-          wob: rand(0, Math.PI*2),
-          wobSpd: rand(0.003, 0.012),
-          grow: rand(0.002, 0.010),
-        });
-      }
-
-      dust = [];
-      for(let i=0;i<DUST;i++){
-        dust.push({
-          x: rand(0,w),
-          y: rand(0,h),
-          r: rand(6, 18),
-          a: rand(0.04, 0.09),
-          vx: rand(-0.08, 0.08),
-          vy: rand(-0.06, 0.06),
-        });
-      }
-    }
-
-    function draw(now){
-      const rect = canvas.getBoundingClientRect();
-      const w = rect.width, h = rect.height;
-
-      ctx.clearRect(0,0,w,h);
-
-      let dp = 0;
-      if(dissolving) dp = Math.min(1, (now - dissolveStart) / 1450);
-
-      // blur mais “nuvem”
-      const blur = reduceMotion ? 0 : (isMobile() ? 15 : 18);
-
-      ctx.save();
-      ctx.filter = blur ? `blur(${blur}px)` : 'none';
-
-      // Camada base (puffs)
-      for(const p of puffs){
-        p.wob += p.wobSpd;
-        p.x += p.vx + Math.sin(p.wob)*0.06;
-        p.y += p.vy + Math.cos(p.wob)*0.03;
-
-        const rr = p.r * (1 + dp*0.75) + dp*120*p.grow;
-        const yy = p.y - dp*34;
-
-        if(p.x < -rr) p.x = w + rr;
-        if(p.x > w + rr) p.x = -rr;
-        if(p.y < -rr) p.y = h + rr;
-        if(p.y > h + rr) p.y = -rr;
-
-        const alpha = Math.max(0, p.a * (1 - dp*1.35));
-        if(alpha <= 0.001) continue;
-
-        const g = ctx.createRadialGradient(p.x, yy, rr*0.12, p.x, yy, rr);
-        g.addColorStop(0, `rgba(255,255,255,${alpha})`);
-        g.addColorStop(0.58, `rgba(255,255,255,${alpha*0.88})`);
-        g.addColorStop(1, `rgba(255,255,255,0)`);
-
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(p.x, yy, rr, 0, Math.PI*2);
-        ctx.fill();
-      }
-
-      // “Dust” para textura (mais realista)
-      for(const d of dust){
-        d.x += d.vx;
-        d.y += d.vy;
-        if(d.x < -d.r) d.x = w + d.r;
-        if(d.x > w + d.r) d.x = -d.r;
-        if(d.y < -d.r) d.y = h + d.r;
-        if(d.y > h + d.r) d.y = -d.r;
-
-        const alpha = Math.max(0, d.a * (1 - dp*1.25));
-        const g2 = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r*(1+dp*0.7));
-        g2.addColorStop(0, `rgba(255,255,255,${alpha})`);
-        g2.addColorStop(1, `rgba(255,255,255,0)`);
-        ctx.fillStyle = g2;
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
-        ctx.fill();
-      }
-
-      ctx.restore();
-
-      // brilho central suave
-      if(!reduceMotion){
-        ctx.save();
-        ctx.globalCompositeOperation = "screen";
-        const glow = ctx.createRadialGradient(w*0.50, h*0.52, 20, w*0.50, h*0.52, w*0.48);
-        glow.addColorStop(0, `rgba(255,255,255,${0.26*(1-dp)})`);
-        glow.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = glow;
-        ctx.fillRect(0,0,w,h);
-        ctx.restore();
-      }
-
-      if(!reduceMotion) requestAnimationFrame(draw);
-    }
-
-    initFog();
-    if(!reduceMotion) requestAnimationFrame(draw);
-
-    /* ========= PAGING (uma página por tema) ========= */
-    const pages = Array.from(document.querySelectorAll('.page'));
-    let idx = 0;
-
-    const dotsWrap = document.getElementById('dots');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    function buildDots(){
-      dotsWrap.innerHTML = '';
-      pages.forEach((_,i)=>{
-        const dot = document.createElement('div');
-        dot.className = 'dot' + (i===idx ? ' on' : '');
-        dot.addEventListener('click', ()=> go(i));
-        dotsWrap.appendChild(dot);
-      });
-    }
-
-    function go(n){
-      n = Math.max(0, Math.min(pages.length-1, n));
-      if(n === idx) return;
-
-      pages[idx].classList.remove('active');
-      pages[n].classList.add('active');
-      idx = n;
-      buildDots();
-    }
-
-    prevBtn.addEventListener('click', ()=>go(idx-1));
-    nextBtn.addEventListener('click', ()=>go(idx+1));
-    buildDots();
-
-    // Scroll / wheel: muda de página (com throttle)
-    let wheelLock = false;
-    window.addEventListener('wheel', (e)=>{
-      if(wheelLock) return;
-      wheelLock = true;
-      setTimeout(()=>wheelLock=false, 520);
-      if(e.deltaY > 0) go(idx+1);
-      else if(e.deltaY < 0) go(idx-1);
-    }, { passive:true });
-
-    // Swipe (mobile)
-    let startY = null, startX = null;
-    window.addEventListener('touchstart', (e)=>{
-      const t = e.touches[0];
-      startY = t.clientY;
-      startX = t.clientX;
-    }, { passive:true });
-    window.addEventListener('touchend', (e)=>{
-      if(startY === null) return;
-      const t = e.changedTouches[0];
-      const dy = t.clientY - startY;
-      const dx = t.clientX - startX;
-      startY = null; startX = null;
-      if(Math.abs(dy) < 40 || Math.abs(dy) < Math.abs(dx)) return;
-      if(dy < 0) go(idx+1);
-      else go(idx-1);
-    }, { passive:true });
-
-    // Teclado
-    window.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') go(idx+1);
-      if(e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') go(idx-1);
-      if(e.key === 'Home') go(0);
-      if(e.key === 'End') go(pages.length-1);
-    });
-
-    /* ========= OVERLAY: 1º nuvem, depois convite automático ========= */
-    // Nuvem dura 2.5s e começa a esfumar. Quando começa a esfumar, o convite já fica visível (página 1 ativa).
-    setTimeout(() => {
-      dissolving = true;
-      dissolveStart = performance.now();
-      cloud.classList.add('dissolve');
-
-      setTimeout(() => {
-        cloud.remove();
-      }, 1900);
-    }, 2500);
-
-    
-
-    /* ========= AUTO ADVANCE (com pausa de 45s ao interagir) ========= */
-
-    let autoTimer = null;
-    let autoPausedUntil = 0;
-    const AUTO_INTERVAL = 6500; // tempo entre páginas
-    const PAUSE_DURATION = 45000; // 45 segundos
-
-    function scheduleAuto(){
-      clearTimeout(autoTimer);
-      autoTimer = setTimeout(()=>{
-        if(Date.now() < autoPausedUntil){
-          scheduleAuto();
-          return;
-        }
-        go(idx + 1);
-        scheduleAuto();
-      }, AUTO_INTERVAL);
-    }
-
-    function pauseAuto(){
-      autoPausedUntil = Date.now() + PAUSE_DURATION;
-    }
-
-    ['pointerdown','touchstart','wheel','keydown'].forEach(ev=>{
-      window.addEventListener(ev, pauseAuto, { passive:true });
-    });
-
-    scheduleAuto();
-
-
-    /* ========= COUNTDOWN ========= */
-    const target = new Date("2026-06-02T11:30:00");
-    const $d = document.getElementById('d');
-    const $h = document.getElementById('h');
-    const $m = document.getElementById('m');
-    const $s = document.getElementById('s');
-    const pad = n => String(n).padStart(2,'0');
-
-    function tick(){
-      const now = new Date();
-      let diff = target - now;
-      if(diff <= 0){
-        $d.textContent="00"; $h.textContent="00"; $m.textContent="00"; $s.textContent="00";
-        return;
-      }
-      const total = Math.floor(diff/1000);
-      const days = Math.floor(total/86400);
-      const hours = Math.floor((total%86400)/3600);
-      const mins = Math.floor((total%3600)/60);
-      const secs = total%60;
-      $d.textContent = pad(days);
-      $h.textContent = pad(hours);
-      $m.textContent = pad(mins);
-      $s.textContent = pad(secs);
-    }
-    tick();
-    setInterval(tick, 1000);
-
-    /* ========= WHATSAPP ========= */
-    const pai = "351915149673";
-    const mae = "351914188636";
-    const msg = encodeURIComponent(
-      "Olá! 😊 Confirmo a minha presença no Batizado da Olívia (02/06/2026). " +
-      "Confirma até 31 de Março. Número de pessoas: _____. Obrigado/a!"
-    );
-    document.getElementById('btnPai').href = `https://wa.me/${pai}?text=${msg}`;
-    document.getElementById('btnMae').href = `https://wa.me/${mae}?text=${msg}`;
-
-    /* ========= GOOGLE MAPS ========= */
-    const qIgreja = encodeURIComponent("Igreja Matriz de Tentúgal");
-    const qPatinhos = encodeURIComponent("Patinhos, Carapinheira");
-    document.getElementById('mapIgreja').href = `https://www.google.com/maps/search/?api=1&query=${qIgreja}`;
-    document.getElementById('mapPatinhos').href = `https://www.google.com/maps/search/?api=1&query=${qPatinhos}`;
-  </script>
 </body>
 </html>
