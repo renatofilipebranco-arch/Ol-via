@@ -13,7 +13,6 @@
  --blush:#e3a8b5;
  --ink:#1f2a22;
 }
-
 *{box-sizing:border-box;}
 html,body{
  margin:0;
@@ -34,47 +33,25 @@ html,body{
  background:#ffffff;
  z-index:9999;
 }
-
 .glow{
  position:absolute;
  width:60vw;
  height:60vw;
- background:radial-gradient(circle, rgba(255,255,255,.9), transparent 70%);
+ background:radial-gradient(circle, rgba(255,255,255,.95), transparent 70%);
  filter:blur(60px);
- opacity:0;
+ opacity:.0;
  animation:glowPulse 2.5s ease 1s forwards;
 }
-
-@keyframes glowPulse{
- 0%{ opacity:0; }
- 100%{ opacity:.8; }
-}
-
+@keyframes glowPulse{ to{opacity:.8;} }
 .intro img{
  width:min(420px,70vw);
  opacity:0;
  animation:doveIn 2s ease forwards;
+ filter:brightness(1.05);
 }
-
 @keyframes doveIn{
- 0%{ opacity:0; transform:scale(.85); }
- 100%{ opacity:1; transform:scale(1); }
-}
-
-.whiteFlash{
- position:fixed;
- inset:0;
- background:#ffffff;
- opacity:0;
- pointer-events:none;
-}
-
-.whiteFlash.active{
- animation:whiteFade 1.8s ease forwards;
-}
-
-@keyframes whiteFade{
- to{ opacity:1; }
+ 0%{opacity:0; transform:scale(.85);}
+ 100%{opacity:1; transform:scale(1);}
 }
 
 /* PAGES */
@@ -88,26 +65,17 @@ html,body{
  text-align:center;
  padding:40px 25px;
  opacity:0;
- transition: opacity .9s ease, transform .9s ease;
- transform: translateY(10px);
-
-  transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
-  transform: translateY(12px) scale(.995);
-  filter: blur(4px);
+ pointer-events:none;
+ transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
+ transform: translateY(12px) scale(.995);
+ filter: blur(4px);
 }
-
 .page.show{
-  opacity:1;
-  transform: translateY(0);
-  filter: blur(0px);
  opacity:1;
- transform: translateY(0);
+ pointer-events:auto;
+ transform: translateY(0) scale(1);
+ filter: blur(0px);
 }
-
-
- 100%{ opacity:1; transform:scale(1); }
-}
-
 .page::before{
  content:"";
  position:absolute;
@@ -117,7 +85,6 @@ html,body{
  opacity:.08;
  pointer-events:none;
 }
-
 .page-main::before{ opacity:.16; }
 
 h1{
@@ -126,30 +93,28 @@ h1{
  color:var(--sage);
  margin:0 0 20px;
 }
-
 .sub{
  color:var(--blush);
  font-weight:600;
  font-size:18px;
  letter-spacing:.04em;
  margin-bottom:25px;
+ opacity:0;
+ animation:dateFade 1.2s ease 0.9s forwards;
 }
+@keyframes dateFade{ to{opacity:1;} }
 
 .text{
  max-width:720px;
  font-size:19px;
  line-height:1.85;
+ opacity:0;
+ animation:textFade 1.5s ease 1.4s forwards;
 }
+@keyframes textFade{ to{opacity:1;} }
 
-.details{
- font-size:18px;
- line-height:1.6;
-}
-
-.countdown{
- margin-top:20px;
- font-size:20px;
-}
+.details{ font-size:18px; line-height:1.6; }
+.countdown{ margin-top:20px; font-size:20px; }
 
 .btnRow{
  margin-top:25px;
@@ -158,17 +123,17 @@ h1{
  flex-wrap:wrap;
  justify-content:center;
 }
-
 .btn{
  padding:14px 22px;
  border-radius:14px;
  text-decoration:none;
  font-weight:600;
+ color:#1a1a1a;
 }
-
 .pai{ background:rgba(145,168,141,.35); }
 .mae{ background:rgba(244,214,221,.7); }
 
+/* Nav arrows bottom, subtle */
 .nav{
  position:fixed;
  bottom:18px;
@@ -179,37 +144,6 @@ h1{
  gap:22px;
  z-index:10;
 }
-
-.nav .arrow{
- border:none;
- background:rgba(0,0,0,.03);
- width:34px;
- height:34px;
- border-radius:50%;
- cursor:pointer;
- font-size:15px;
- opacity:.55;
- backdrop-filter:blur(2px);
- transition:opacity .3s ease;
-}
-.arrow:hover{
- opacity:.85;
-}
-
-.nav .arrow:first-child{
- left:15px;
-}
-
-.nav .arrow:last-child{
- right:15px;
-}
- left:0;
- right:0;
- display:flex;
- justify-content:center;
- gap:20px;
-}
-
 .arrow{
  border:none;
  background:rgba(0,0,0,.03);
@@ -220,11 +154,10 @@ h1{
  font-size:15px;
  opacity:.55;
  backdrop-filter:blur(2px);
- transition:opacity .3s ease;
+ transition:opacity .3s ease, transform .25s ease;
 }
-.arrow:hover{
- opacity:.85;
-}
+.arrow:hover{ opacity:.85; transform:translateY(-1px); }
+.arrow:active{ transform:translateY(0) scale(.98); }
 
 /* Music toggle button */
 .musicBtn{
@@ -249,6 +182,23 @@ h1{
 .musicBtn:hover{ opacity:.95; transform:translateY(-1px); }
 .musicBtn:active{ transform:translateY(0px) scale(.98); }
 
+/* Map buttons */
+.mapRow{
+  margin-top:18px;
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.mapBtn{
+  padding:12px 18px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+  color:#1a1a1a;
+}
+.mapChurch{ background:rgba(145,168,141,.25); }
+.mapVenue{ background:rgba(244,214,221,.6); }
 </style>
 </head>
 
@@ -259,113 +209,142 @@ h1{
  <img src="pomba.png" alt="Pomba branca">
 </div>
 
-<div class="whiteFlash" id="whiteFlash"></div>
+<button class="musicBtn" id="musicBtn" aria-label="Som ligado/desligado" title="Som">🔊</button>
+<audio id="bgMusic" autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
 
 <section class="page page-main" id="page1">
  <h1>Batizado da Olívia</h1>
  <div class="sub">02 de Maio de 2026</div>
  <div class="text">
- É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
- Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
- A vossa presença tornará este dia ainda mais especial 🤍
+   É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
+   Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
+   A vossa presença tornará este dia ainda mais especial 🤍
  </div>
 </section>
 
 <section class="page" id="page2">
  <h1 style="font-size:40px;">Detalhes</h1>
  <div class="details">
- <strong>11h30</strong><br>
- Igreja Matriz de Tentúgal<br><br>
- <strong>Almoço</strong><br>
- Patinhos
+   <strong>11h30</strong><br>
+   Igreja Matriz de Tentúgal<br><br>
+   <strong>Almoço</strong><br>
+   Patinhos
+   <div class="mapRow">
+     <a class="mapBtn mapChurch" href="https://www.google.com/maps/search/?api=1&query=Igreja+Matriz+de+Tentugal" target="_blank">Ver Igreja no Maps</a>
+     <a class="mapBtn mapVenue" href="https://www.google.com/maps/search/?api=1&query=Patinhos+Carapinheira" target="_blank">Ver Quinta no Maps</a>
+   </div>
  </div>
-<br><br>
-<div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
-  <a href="https://www.google.com/maps/search/?api=1&query=Igreja+Matriz+de+Tentugal" target="_blank"
-     style="padding:12px 18px;border-radius:12px;background:rgba(145,168,141,.25);text-decoration:none;font-weight:600;">
-     Ver Igreja no Maps
-  </a>
-  <a href="https://www.google.com/maps/search/?api=1&query=Patinhos+Carapinheira" target="_blank"
-     style="padding:12px 18px;border-radius:12px;background:rgba(244,214,221,.6);text-decoration:none;font-weight:600;">
-     Ver Quinta no Maps
-  </a>
-</div>
-
 </section>
 
 <section class="page" id="page3">
  <h1 style="font-size:40px;">Confirmação</h1>
  <div class="countdown" id="countdown"></div>
  <div class="btnRow">
-   <a class="btn pai" href="https://wa.me/351915149673" target="_blank">Confirmar com o Pai</a>
-   <a class="btn mae" href="https://wa.me/351914188636" target="_blank">Confirmar com a Mãe</a>
+   <a class="btn pai" id="btnPai" href="#" target="_blank">Confirmar com o Pai</a>
+   <a class="btn mae" id="btnMae" href="#" target="_blank">Confirmar com a Mãe</a>
  </div>
  <p style="margin-top:15px;">Confirma até <strong>31 de Março</strong></p>
 </section>
 
-<div class="nav">
- <button class="arrow" onclick="change(-1)">‹</button>
- <button class="arrow" onclick="change(1)">›</button>
+<div class="nav" aria-label="Navegação">
+ <button class="arrow" id="prevBtn" type="button">‹</button>
+ <button class="arrow" id="nextBtn" type="button">›</button>
 </div>
 
 <script>
-// Cinematic intro sequence
-setTimeout(()=>{
- document.getElementById('whiteFlash').classList.add('active');
-}, 3600);
+/* ===== Music: autoplay + toggle + fade-in + sync ===== */
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+const TARGET_VOL = 0.35;
 
-setTimeout(()=>{
- document.getElementById('intro').style.opacity='0';
- document.getElementById('intro').style.transition='opacity 1.6s ease';
-}, 4600);
-
-setTimeout(()=>{
- document.getElementById('intro').style.display='none';
- document.getElementById('page1').classList.add('show');
-}, 6400);
-
-// Paging
-let pages=document.querySelectorAll('.page');
-let index=0;
-
-function change(step){
- pages[index].classList.remove('show');
- index=(index+step+pages.length)%pages.length;
- pages[index].classList.add('show');
+function setIcon(){ btn.textContent = music.muted ? "🔇" : "🔊"; }
+function fadeIn(durationMs=3000){
+  const start = performance.now();
+  const from = 0, to = TARGET_VOL;
+  music.volume = from;
+  const step = (t)=>{
+    const p = Math.min(1, (t-start)/durationMs);
+    const s = p*p*(3-2*p);
+    music.volume = from + (to-from)*s;
+    if(p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
 }
 
+music.addEventListener('loadedmetadata', ()=>{ try{ music.currentTime = 38.0; }catch(e){} });
 
-let startX = null;
+async function tryPlay(){
+  try{
+    await music.play();
+    if(!music.muted) fadeIn(3000);
+  }catch(e){}
+}
 
-document.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
+btn.addEventListener("click", async ()=>{
+  try{ await music.play(); }catch(e){}
+  music.muted = !music.muted;
+  if(!music.muted) fadeIn(2000);
+  setIcon();
+});
+
+music.muted = false;
+setIcon();
+tryPlay();
+
+document.addEventListener("click", function(){
+  music.play().then(()=>{ if(!music.muted) fadeIn(2500); }).catch(()=>{});
+}, { once:true });
+
+/* ===== Pages + intro + auto + swipe ===== */
+const pages = [...document.querySelectorAll(".page")];
+let index = 0;
+
+function render(){
+  pages.forEach((p,i)=> p.classList.toggle("show", i===index));
+}
+
+function change(step){
+  index = (index + step + pages.length) % pages.length;
+  render();
+  pauseAuto(); // any navigation pauses briefly
+}
+
+document.getElementById("prevBtn").addEventListener("click", ()=>change(-1));
+document.getElementById("nextBtn").addEventListener("click", ()=>change(1));
+
+/* Swipe (telemóvel) */
+let startX=null;
+document.addEventListener('touchstart', e=>{ startX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e=>{
+  if(startX===null) return;
+  const diff = e.changedTouches[0].clientX - startX;
+  if(Math.abs(diff) > 50) change(diff < 0 ? 1 : -1);
+  startX=null;
 }, {passive:true});
 
-document.addEventListener('touchend', e => {
-  if(startX === null) return;
-  let diff = e.changedTouches[0].clientX - startX;
-  if(Math.abs(diff) > 50){
-    change(diff < 0 ? 1 : -1);
-  }
-  startX = null;
-}, {passive:true});
+/* Intro: pomba e reveal suave */
+const introEl = document.getElementById("intro");
+function startReveal(){
+  introEl.style.transition = "opacity 1.6s ease";
+  introEl.style.opacity = "0";
+  setTimeout(()=>{
+    introEl.style.display = "none";
+    index = 0;
+    render();
+    scheduleNext(); // start auto right after reveal
+  }, 1600);
+}
+setTimeout(startReveal, 4500);
 
-
-
-// Auto slide refinado
+/* Auto slide: 1ª página 10s, restantes 8s, pausa 10s ao interagir */
 let autoTimer = null;
 let autoPausedUntil = 0;
 
 function scheduleNext(){
   clearTimeout(autoTimer);
-  
-  let delay;
-  if(index === 0){
-    delay = 10000; // primeira página 10s
-  } else {
-    delay = 8000;  // restantes 8s
-  }
-
+  const delay = (index===0) ? 10000 : 8000;
   autoTimer = setTimeout(()=>{
     if(Date.now() < autoPausedUntil){
       scheduleNext();
@@ -376,129 +355,36 @@ function scheduleNext(){
   }, delay);
 }
 
-// começa depois da intro
-setTimeout(()=>{
-  scheduleNext();
-}, 18000);
-
-// pausa automática 45s ao interagir
 function pauseAuto(){
-  autoPausedUntil = Date.now() + 10000;
+  autoPausedUntil = Date.now() + 10000; // 10 segundos
 }
 
 ['touchstart','pointerdown','wheel','keydown'].forEach(ev=>{
   document.addEventListener(ev, pauseAuto, { passive:true });
 });
-}, 18000);
-// Countdown
-const target=new Date("2026-05-02T11:30:00");
+
+/* WhatsApp links com mensagem */
+const msg = encodeURIComponent("Olá! 😊 Confirmo a presença no Batizado da Olívia (02/05/2026). Confirma até 31 de Março. Número de pessoas: _____. Obrigado/a!");
+document.getElementById('btnPai').href = "https://wa.me/351915149673?text=" + msg;
+document.getElementById('btnMae').href = "https://wa.me/351914188636?text=" + msg;
+
+/* Countdown */
+const target = new Date("2026-05-02T11:30:00");
 function updateCountdown(){
- const now=new Date();
- const diff=target-now;
- if(diff<=0) return;
- const d=Math.floor(diff/1000/60/60/24);
- const h=Math.floor(diff/1000/60/60)%24;
- const m=Math.floor(diff/1000/60)%60;
- const s=Math.floor(diff/1000)%60;
- document.getElementById('countdown').innerHTML =
-  d+" dias "+h+"h "+m+"m "+s+"s";
+  const now = new Date();
+  const diff = target - now;
+  if(diff <= 0){
+    document.getElementById('countdown').textContent = "Chegou o dia 🤍";
+    return;
+  }
+  const d = Math.floor(diff/1000/60/60/24);
+  const h = Math.floor(diff/1000/60/60)%24;
+  const m = Math.floor(diff/1000/60)%60;
+  const s = Math.floor(diff/1000)%60;
+  document.getElementById('countdown').textContent = `${d} dias ${h}h ${m}m ${s}s`;
 }
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 updateCountdown();
-</script>
-
-
-
-<button class="musicBtn" id="musicBtn" aria-label="Som ligado/desligado" title="Som">🔊</button>
-<audio id="bgMusic" autoplay loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
-
-<script>
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicBtn");
-const TARGET_VOL = 0.35;
-let fadeTimer = null;
-
-function setIcon(){
-  btn.textContent = music.muted ? "🔇" : "🔊";
-}
-
-function fadeIn(durationMs=3000){
-  // start from 0 volume and ramp up to TARGET_VOL
-  if(fadeTimer) cancelAnimationFrame(fadeTimer);
-  const start = performance.now();
-  const from = 0;
-  const to = TARGET_VOL;
-  music.volume = from;
-
-  const step = (t)=>{
-    const p = Math.min(1, (t - start)/durationMs);
-    // smoothstep
-    const s = p*p*(3-2*p);
-    music.volume = from + (to-from)*s;
-    if(p < 1) fadeTimer = requestAnimationFrame(step);
-  };
-  fadeTimer = requestAnimationFrame(step);
-}
-
-music.addEventListener('loadedmetadata', ()=>{ try{ music.currentTime = 38.0; }catch(e){} });
-
-async function tryPlay(){
-  try{
-    await music.play();
-    // if playing, do fade-in
-    if(!music.muted) fadeIn(3000);
-  }catch(e){
-    // autoplay blocked; we’ll play on first user interaction
-  }
-}
-
-btn.addEventListener("click", async ()=>{
-  // Ensure it's playing
-  try{ await music.play(); }catch(e){}
-  music.muted = !music.muted;
-  if(!music.muted){
-    // resume with gentle fade
-    fadeIn(2000);
-  }
-  setIcon();
-});
-
-// Autoplay attempt
-music.muted = false;
-setIcon();
-tryPlay();
-
-// Mobile autoplay fallback (play on first interaction if blocked)
-document.addEventListener("click", function(){
-  music.play().then(()=>{
-    if(!music.muted) fadeIn(2500);
-  }).catch(()=>{});
-}, { once: true });
-</script>
-
-
-
-<script>
-// CINEMATIC_FIX_SEQUENCE
-const introEl = document.getElementById("intro");
-const page1 = document.getElementById("page1");
-
-function startReveal(){
-  // soft fade intro
-  introEl.style.transition = "opacity 1.6s ease";
-  introEl.style.opacity = "0";
-
-  setTimeout(()=>{
-    introEl.style.display = "none";
-    page1.classList.add("show");
-  }, 1600);
-}
-
-// start reveal after dove moment (~4.5s total)
-setTimeout(startReveal, 4500);
 </script>
 
 </body>
