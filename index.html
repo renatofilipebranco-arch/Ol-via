@@ -30,6 +30,7 @@ html,body{
  color:var(--ink);
 }
 
+/* IMPORTANTE: páginas invisíveis não recebem clique */
 .page{
  position:absolute;
  inset:0;
@@ -40,12 +41,18 @@ html,body{
  text-align:center;
  padding:44px 24px;
  opacity:0;
+ pointer-events:none;
  filter:blur(12px);
  transform:scale(.97);
  transition:opacity .9s ease,filter .9s ease,transform .9s ease;
 }
 
-.page.active{ opacity:1; filter:blur(0); transform:scale(1); }
+.page.active{
+ opacity:1;
+ pointer-events:auto;
+ filter:blur(0);
+ transform:scale(1);
+}
 
 h1{
  font-family:'Allura',cursive;
@@ -54,11 +61,11 @@ h1{
  margin:0;
  line-height:1;
 }
+
 .sub{
  margin-top:10px;
  font-size:16px;
  color:rgba(0,0,0,.55);
- letter-spacing:.02em;
 }
 
 h2{
@@ -145,156 +152,145 @@ h2{
  font-size:16px;
 }
 
-/* Nuvem celestial bem visível */
+/* Nuvem celestial */
 .cloud{
  position:fixed;
  inset:0;
  z-index:9999;
- pointer-events:none;
  background:
    radial-gradient(900px 680px at 40% 42%, rgba(255,255,255,1), rgba(255,255,255,0) 60%),
-   radial-gradient(920px 720px at 62% 50%, rgba(255,255,255,.92), rgba(255,255,255,0) 66%),
-   radial-gradient(860px 640px at 55% 60%, rgba(249,231,235,.92), rgba(249,231,235,0) 70%),
+   radial-gradient(860px 640px at 55% 60%, rgba(249,231,235,.9), rgba(249,231,235,0) 70%),
    radial-gradient(760px 560px at 55% 35%, rgba(244,214,221,.75), rgba(244,214,221,0) 72%),
    linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,1));
- opacity:1;
  animation: cloudFloat 5.5s ease-in-out infinite alternate;
 }
 
 @keyframes cloudFloat{
-  0%{ transform: scale(1) translateY(0); filter: blur(0px); }
-  100%{ transform: scale(1.03) translateY(-8px); filter: blur(.4px); }
+ 0%{ transform: scale(1); }
+ 100%{ transform: scale(1.03); }
 }
 
 .cloud.dissolve{ animation: cloudDissolve 2.6s ease forwards; }
 
 @keyframes cloudDissolve{
-  0%{ opacity:1; transform: scale(1.02) translateY(0); filter: blur(0px); }
-  45%{ opacity:1; transform: scale(1.06) translateY(-10px); filter: blur(10px); }
-  100%{ opacity:0; transform: scale(1.10) translateY(-18px); filter: blur(22px); }
+ 0%{ opacity:1; filter:blur(0px); }
+ 50%{ opacity:1; filter:blur(10px); }
+ 100%{ opacity:0; filter:blur(22px); }
 }
-
-/* fallback debug: se algo falhar, ainda se vê o convite */
 </style>
 </head>
 
 <body>
-  <div class="cloud" id="cloud"></div>
 
-  <section class="page active" aria-label="Convite e Mensagem">
-    <div class="watermark"></div>
-    <h1>Batizado da Olívia</h1>
-    <div class="sub">02 de junho de 2026</div>
-    <div style="height:18px"></div>
-    <div class="text">
-      É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
-      Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
-      A vossa presença tornará este dia ainda mais especial 🤍
-    </div>
-  </section>
+<div class="cloud" id="cloud"></div>
 
-  <section class="page" aria-label="Detalhes">
-    <h2>Detalhes</h2>
-    <div class="text">
-      <strong>11h30</strong><br>
-      Igreja Matriz de Tentúgal<br><br>
-      <strong>Almoço</strong><br>
-      Patinhos
-    </div>
-  </section>
+<section class="page active">
+ <div class="watermark"></div>
+ <h1>Batizado da Olívia</h1>
+ <div class="sub">02 de junho de 2026</div>
+ <div style="height:18px"></div>
+ <div class="text">
+  É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
+  Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
+  A vossa presença tornará este dia ainda mais especial 🤍
+ </div>
+</section>
 
-  <section class="page" aria-label="Confirmação">
-    <h2>Confirmação</h2>
-    <div class="countdown" aria-label="Contagem decrescente">
-      <div><span id="d">--</span>d</div>
-      <div><span id="h">--</span>h</div>
-      <div><span id="m">--</span>m</div>
-      <div><span id="s">--</span>s</div>
-    </div>
-    <div class="btnRow">
-      <a class="btn pai" id="btnPai" href="#">Confirmar com o Pai</a>
-      <a class="btn mae" id="btnMae" href="#">Confirmar com a Mãe</a>
-    </div>
-    <p style="margin-top:14px;font-size:13px;color:rgba(0,0,0,.58);">Confirma até <strong>31 de Março</strong></p>
-  </section>
+<section class="page">
+ <h2>Detalhes</h2>
+ <div class="text">
+  <strong>11h30</strong><br>
+  Igreja Matriz de Tentúgal<br><br>
+  <strong>Almoço</strong><br>
+  Patinhos
+ </div>
+</section>
 
-  <div class="nav" aria-label="Navegação">
-    <button class="arrow" id="prevBtn" type="button">‹</button>
-    <button class="arrow" id="nextBtn" type="button">›</button>
-  </div>
+<section class="page">
+ <h2>Confirmação</h2>
+ <div class="countdown">
+  <div><span id="d">--</span>d</div>
+  <div><span id="h">--</span>h</div>
+  <div><span id="m">--</span>m</div>
+  <div><span id="s">--</span>s</div>
+ </div>
+ <div class="btnRow">
+  <a class="btn pai" id="btnPai" href="#">Confirmar com o Pai</a>
+  <a class="btn mae" id="btnMae" href="#">Confirmar com a Mãe</a>
+ </div>
+ <p style="margin-top:14px;font-size:13px;">Confirma até <strong>31 de Março</strong></p>
+</section>
+
+<div class="nav">
+ <button class="arrow" id="prevBtn">‹</button>
+ <button class="arrow" id="nextBtn">›</button>
+</div>
 
 <script>
-  // paging
-  let index=0;
-  const pages=[...document.querySelectorAll('.page')];
-  let pauseUntil=0;
+let index=0;
+const pages=[...document.querySelectorAll('.page')];
+let pauseUntil=0;
 
-  function show(i){
-    pages[index].classList.remove('active');
-    index=(i+pages.length)%pages.length;
-    pages[index].classList.add('active');
-  }
-  function go(step){
-    pauseUntil=Date.now()+45000;
-    show(index+step);
-  }
-  document.getElementById('prevBtn').addEventListener('click', ()=>go(-1));
-  document.getElementById('nextBtn').addEventListener('click', ()=>go(1));
+function show(i){
+ pages[index].classList.remove('active');
+ index=(i+pages.length)%pages.length;
+ pages[index].classList.add('active');
+}
 
-  // auto-advance
-  function auto(){
-    if(Date.now()>pauseUntil) show(index+1);
-    setTimeout(auto,7000);
-  }
-  auto();
+function go(step){
+ pauseUntil=Date.now()+45000;
+ show(index+step);
+}
 
-  ['pointerdown','wheel','keydown','touchstart'].forEach(e=>{
-    window.addEventListener(e, ()=>pauseUntil=Date.now()+45000, {passive:true});
-  });
+document.getElementById('prevBtn').onclick=()=>go(-1);
+document.getElementById('nextBtn').onclick=()=>go(1);
 
-  // swipe
-  let startY=null;
-  window.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;},{passive:true});
-  window.addEventListener('touchend',e=>{
-    if(startY===null) return;
-    const diff=e.changedTouches[0].clientY-startY;
-    if(Math.abs(diff)>50) go(diff<0?1:-1);
-    startY=null;
-  },{passive:true});
+function auto(){
+ if(Date.now()>pauseUntil) show(index+1);
+ setTimeout(auto,7000);
+}
+auto();
 
-  // cloud: visible hold then dissolve
-  const cloud=document.getElementById('cloud');
-  setTimeout(()=> cloud.classList.add('dissolve'), 4500);
-  setTimeout(()=> cloud.remove(), 4500+2600);
+['pointerdown','wheel','keydown','touchstart'].forEach(e=>{
+ window.addEventListener(e,()=>pauseUntil=Date.now()+45000,{passive:true});
+});
 
-  // countdown
-  const target=new Date("2026-06-02T11:30:00");
-  const $d=document.getElementById('d');
-  const $h=document.getElementById('h');
-  const $m=document.getElementById('m');
-  const $s=document.getElementById('s');
+let startY=null;
+window.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;},{passive:true});
+window.addEventListener('touchend',e=>{
+ if(startY===null) return;
+ const diff=e.changedTouches[0].clientY-startY;
+ if(Math.abs(diff)>50) go(diff<0?1:-1);
+ startY=null;
+},{passive:true});
 
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function tick(){
-    const now=new Date();
-    let diff=(target-now)/1000;
-    if(diff<0) diff=0;
-    const days=Math.floor(diff/86400);
-    const hours=Math.floor(diff%86400/3600);
-    const mins=Math.floor(diff%3600/60);
-    const secs=Math.floor(diff%60);
-    $d.textContent=days;
-    $h.textContent=pad(hours);
-    $m.textContent=pad(mins);
-    $s.textContent=pad(secs);
-  }
-  tick();
-  setInterval(tick,1000);
+// Cloud timing
+const cloud=document.getElementById('cloud');
+setTimeout(()=>cloud.classList.add('dissolve'),4500);
+setTimeout(()=>cloud.remove(),7100);
 
-  // WhatsApp
-  const msg=encodeURIComponent("Olá! 😊 Confirmo a presença no Batizado da Olívia (02/06/2026). Confirma até 31 de Março. Número de pessoas: _____. Obrigado/a!");
-  document.getElementById('btnPai').href="https://wa.me/351915149673?text="+msg;
-  document.getElementById('btnMae').href="https://wa.me/351914188636?text="+msg;
+// Countdown
+const target=new Date("2026-06-02T11:30:00");
+function pad(n){return String(n).padStart(2,'0');}
+function tick(){
+ const now=new Date();
+ let diff=(target-now)/1000;
+ if(diff<0) diff=0;
+ const d=Math.floor(diff/86400);
+ const h=Math.floor(diff%86400/3600);
+ const m=Math.floor(diff%3600/60);
+ const s=Math.floor(diff%60);
+ document.getElementById('d').textContent=d;
+ document.getElementById('h').textContent=pad(h);
+ document.getElementById('m').textContent=pad(m);
+ document.getElementById('s').textContent=pad(s);
+}
+tick();
+setInterval(tick,1000);
+
+const msg=encodeURIComponent("Olá! 😊 Confirmo a presença no Batizado da Olívia (02/06/2026). Confirma até 31 de Março. Número de pessoas: _____. Obrigado/a!");
+document.getElementById('btnPai').href="https://wa.me/351915149673?text="+msg;
+document.getElementById('btnMae').href="https://wa.me/351914188636?text="+msg;
 </script>
 
 </body>
