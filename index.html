@@ -98,7 +98,7 @@ html,body{
 
 .page.show{
   opacity:1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   filter: blur(0px);
  opacity:1;
  transform: translateY(0);
@@ -479,6 +479,27 @@ document.addEventListener("click", function(){
 }, { once: true });
 </script>
 
+
+
+<script>
+// CINEMATIC_FIX_SEQUENCE
+const introEl = document.getElementById("intro");
+const page1 = document.getElementById("page1");
+
+function startReveal(){
+  // soft fade intro
+  introEl.style.transition = "opacity 1.6s ease";
+  introEl.style.opacity = "0";
+
+  setTimeout(()=>{
+    introEl.style.display = "none";
+    page1.classList.add("show");
+  }, 1600);
+}
+
+// start reveal after dove moment (~4.5s total)
+setTimeout(startReveal, 4500);
+</script>
 
 </body>
 </html>
