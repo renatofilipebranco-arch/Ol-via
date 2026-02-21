@@ -70,7 +70,7 @@ html,body{
 }
 
 .whiteFlash.active{
- animation:whiteFade 1.2s ease forwards;
+ animation:whiteFade 1.8s ease forwards;
 }
 
 @keyframes whiteFade{
@@ -162,7 +162,11 @@ h1{
 
 .nav{
  position:fixed;
- bottom:15px;
+ top:50%;
+ transform:translateY(-50%);
+ width:100%;
+ justify-content:space-between;
+ padding:0 20px;
  left:0;
  right:0;
  display:flex;
@@ -242,12 +246,17 @@ h1{
 // Cinematic intro sequence
 setTimeout(()=>{
  document.getElementById('whiteFlash').classList.add('active');
-}, 3500);
+}, 3200);
 
 setTimeout(()=>{
- document.getElementById('intro').style.display="none";
+ document.getElementById('intro').style.opacity='0';
+ document.getElementById('intro').style.transition='opacity 1.6s ease';
+}, 4200);
+
+setTimeout(()=>{
+ document.getElementById('intro').style.display='none';
  document.getElementById('page1').classList.add('show');
-}, 4700);
+}, 5600);
 
 // Paging
 let pages=document.querySelectorAll('.page');
@@ -258,6 +267,22 @@ function change(step){
  index=(index+step+pages.length)%pages.length;
  pages[index].classList.add('show');
 }
+
+
+let startX = null;
+
+document.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+}, {passive:true});
+
+document.addEventListener('touchend', e => {
+  if(startX === null) return;
+  let diff = e.changedTouches[0].clientX - startX;
+  if(Math.abs(diff) > 50){
+    change(diff < 0 ? 1 : -1);
+  }
+  startX = null;
+}, {passive:true});
 
 // Countdown
 const target=new Date("2026-05-02T11:30:00");
