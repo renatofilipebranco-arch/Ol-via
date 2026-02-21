@@ -10,7 +10,7 @@
 <style>
 :root{
  --sage:#91a88d;
- --blush:#f4d6dd;
+ --blush:#e3a8b5;
  --ink:#1f2a22;
 }
 *{box-sizing:border-box;}
@@ -23,40 +23,33 @@ html,body{
  color:var(--ink);
 }
 
-/* INTRO NUVEM */
-.cloudIntro{
+/* INTRO POMBA */
+.intro{
  position:fixed;
  inset:0;
  display:flex;
  align-items:center;
  justify-content:center;
- background:
-   radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,1) 70%);
+ background:radial-gradient(circle at center, #ffffff 0%, #f9f9f7 80%);
  z-index:9999;
- animation: fadeOut 5s ease 6s forwards;
 }
 
-.cloudGlow{
- position:absolute;
- width:80vw;
- height:80vw;
- background:radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
- filter:blur(80px); opacity:.7;
+.intro img{
+ width:min(420px,70vw);
+ opacity:0;
+ animation:doveAppear 2.5s ease forwards;
 }
 
-.cloudIntro img{
- width:min(750px,85vw);
- opacity:.9;
- filter: saturate(.5) brightness(1.2) blur(2px);
- animation: float 7s ease-in-out infinite alternate;
+@keyframes doveAppear{
+ 0%{ opacity:0; transform:scale(.8); }
+ 100%{ opacity:1; transform:scale(1); }
 }
 
-@keyframes float{
- from{ transform:translateY(0px) scale(1); }
- to{ transform:translateY(-18px) scale(1.04); }
+.intro.fadeOut{
+ animation:introFade 2s ease 4s forwards;
 }
 
-@keyframes fadeOut{
+@keyframes introFade{
  to{ opacity:0; visibility:hidden; }
 }
 
@@ -71,22 +64,18 @@ html,body{
  text-align:center;
  padding:40px 25px;
  opacity:0;
- transition:opacity 1s ease;
+ animation:contentFade 2s ease 4.5s forwards;
 }
 
-.page.active{ opacity:1; }
+@keyframes contentFade{
+ to{ opacity:1; }
+}
 
-.page::before{
-  opacity:.08;
-}
-.page-main::before{
-  opacity:.22;
-}
 .page::before{
  content:"";
  position:absolute;
  inset:0;
- background:url('pomba.png') no-repeat center 20%;
+ background:url('pomba.png') no-repeat center 18%;
  background-size:min(520px,80vw);
  opacity:.08;
  pointer-events:none;
@@ -94,78 +83,36 @@ html,body{
 
 h1{
  font-family:'Allura',cursive;
- font-size:clamp(56px,9vw,100px); letter-spacing:.02em;
+ font-size:clamp(56px,9vw,100px);
  color:var(--sage);
  margin:0 0 20px;
 }
 
-.sub{ font-size:16px; margin-bottom:25px; }
-
-.text{ max-width:720px; font-size:19px; line-height:1.85; letter-spacing:.01em; }
-
-.details{ margin-top:20px; font-size:18px; line-height:1.6; }
-
-.countdown{
- margin-top:20px;
- font-size:20px;
-}
-
-.btnRow{
- margin-top:25px;
- display:flex;
- gap:15px;
- flex-wrap:wrap;
- justify-content:center;
-}
-
-.btn{
- padding:14px 22px;
- border-radius:14px;
- text-decoration:none;
+.sub{
+ color:var(--blush);
  font-weight:600;
+ font-size:18px;
+ letter-spacing:.04em;
+ margin-bottom:25px;
 }
 
-.pai{ background:rgba(145,168,141,.35); }
-.mae{ background:rgba(244,214,221,.7); }
-
-.nav{
- position:fixed;
- bottom:15px;
- left:0;
- right:0;
- display:flex;
- justify-content:center;
- gap:20px;
+.text{
+ max-width:720px;
+ font-size:19px;
+ line-height:1.85;
 }
-
-.arrow{
- border:none;
- background:rgba(0,0,0,.05);
- width:36px;
- height:36px;
- border-radius:50%;
- cursor:pointer;
- font-size:16px;
-}
-
-@keyframes dateFade {
-  0% { opacity:0; transform:translateY(10px); }
-  100% { opacity:1; transform:translateY(0); }
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="cloudIntro">
- <div class="cloudGlow"></div>
- <img src="cloud.png" alt="Nuvem suave rosa">
+<div class="intro" id="intro">
+ <img src="pomba.png" alt="Pomba branca">
 </div>
 
-<section class="page active page-main">
+<section class="page">
  <h1>Batizado da Olívia</h1>
- <div class="sub" style="color:#e3a8b5;font-weight:600;font-size:18px;letter-spacing:.04em;opacity:0;animation:dateFade 2s ease 1.5s forwards;">02 de junho de 2026</div>
+ <div class="sub">02 de Maio de 2026</div>
  <div class="text">
  É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
  Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
@@ -173,60 +120,11 @@ h1{
  </div>
 </section>
 
-<section class="page">
- <h1 style="font-size:40px;">Detalhes</h1>
- <div class="details">
- <strong>11h30</strong><br>
- Igreja Matriz de Tentúgal<br><br>
- <strong>Almoço</strong><br>
- Patinhos
- </div>
-</section>
-
-<section class="page">
- <h1 style="font-size:40px;">Confirmação</h1>
- <div class="countdown" id="countdown"></div>
- <div class="btnRow">
-   <a class="btn pai" href="https://wa.me/351915149673" target="_blank">Confirmar com o Pai</a>
-   <a class="btn mae" href="https://wa.me/351914188636" target="_blank">Confirmar com a Mãe</a>
- </div>
- <p style="margin-top:15px;">Confirma até <strong>31 de Março</strong></p>
-</section>
-
-<div class="nav">
- <button class="arrow" onclick="change(-1)">‹</button>
- <button class="arrow" onclick="change(1)">›</button>
-</div>
-
 <script>
-let pages=document.querySelectorAll('.page');
-let index=0;
-
-function change(step){
- pages[index].classList.remove('active');
- index=(index+step+pages.length)%pages.length;
- pages[index].classList.add('active');
-}
-
-const target=new Date("2026-06-02T11:30:00");
-function updateCountdown(){
- const now=new Date();
- const diff=target-now;
- if(diff<=0) return;
- const d=Math.floor(diff/1000/60/60/24);
- const h=Math.floor(diff/1000/60/60)%24;
- const m=Math.floor(diff/1000/60)%60;
- const s=Math.floor(diff/1000)%60;
- document.getElementById('countdown').innerHTML =
-  d+" dias "+h+"h "+m+"m "+s+"s";
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-// Show first page after cloud disappears
+// Fade out intro container
 setTimeout(()=>{
- document.querySelectorAll('.page')[0].classList.add('active');
-},9000);
+ document.getElementById('intro').classList.add('fadeOut');
+}, 3500);
 </script>
 
 </body>
