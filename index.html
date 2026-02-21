@@ -59,11 +59,14 @@ html,body{
   inset:0;
   background: url('pomba.png') no-repeat center 18%;
   background-size: min(520px, 82vw);
-  opacity:.10;
+  opacity: .14;
   pointer-events:none;
   transform: rotate(-6deg);
   filter: brightness(1.15) saturate(.9);
 }
+
+/* Mais visível na página da mensagem */
+.page--message::before{ opacity:.22; background-position: center 14%; }
 .page > *{ position:relative; z-index:1; }
 
 /* Tipografia */
@@ -237,7 +240,7 @@ h2{
 <body>
 <div class="cloud" id="cloud"><canvas id="fog"></canvas></div>
 
-<section class="page active" aria-label="Convite e Mensagem">
+<section class="page active page--message" aria-label="Convite e Mensagem">
   <h1>Batizado da Olívia</h1>
   <div class="sub">02 de junho de 2026</div>
   <div class="text">
@@ -284,7 +287,8 @@ h2{
 <script>
 let index=0;
 const pages=[...document.querySelectorAll('.page')];
-let pauseUntil=0;
+let pauseUntil=Date.now()+12000; // tempo para ver a nuvem + mensagem
+
 function show(i){
   pages[index].classList.remove('active');
   index=(i+pages.length)%pages.length;
@@ -300,7 +304,10 @@ function auto(){
   if(Date.now()>pauseUntil) show(index+1);
   setTimeout(auto,7000);
 }
-auto();
+/* auto inicia depois da nuvem desaparecer */
+let autoStarted=false;
+function startAuto(){ if(autoStarted) return; autoStarted=true; auto(); }
+
 ['pointerdown','wheel','keydown','touchstart'].forEach(e=>{
   window.addEventListener(e,()=>pauseUntil=Date.now()+45000,{passive:true});
 });
@@ -374,8 +381,8 @@ function draw(t){
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
-setTimeout(()=>{ dissolving=true; t0=performance.now(); cloud.classList.add('dissolve'); }, 4800);
-setTimeout(()=> cloud.remove(), 4800+2700);
+setTimeout(()=>{ dissolving=true; t0=performance.now(); cloud.classList.add('dissolve'); }, 6000);
+setTimeout(()=>{ cloud.remove(); startAuto(); }, 6000+3200);
 
 /* Countdown */
 const target=new Date("2026-06-02T11:30:00");
