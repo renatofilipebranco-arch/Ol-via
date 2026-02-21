@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Batizado da Olívia — 02 de junho de 2026</title>
+
+  <!-- Preview (WhatsApp / redes) -->
+  <meta property="og:title" content="Batizado da Olívia — 02 de junho de 2026" />
+  <meta property="og:description" content="Convite para o Batizado da nossa querida Olívia. Cerimónia 11h30 · Igreja Matriz de Tentúgal. Celebração em Patinhos." />
+  <meta property="og:type" content="website" />
+
+  <!-- Tipografia (ajustada) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --sage:#91a88d;
+      --blush:#f4d6dd;
+      --blush2:#f9e7eb;
+      --ink:#1f2a22;
+      --muted:#5b6b60;
+
+      --card: rgba(255,255,255,.80);
+      --glass: rgba(255,255,255,.64);
+      --border: rgba(145,168,141,.30);
+      --shadow: 0 16px 50px rgba(18,25,20,.10);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(1100px 800px at 15% 10%, rgba(145,168,141,.16), transparent 55%),
+        radial-gradient(900px 650px at 95% 25%, rgba(244,214,221,.35), transparent 58%),
+        radial-gradient(1200px 900px at 60% 120%, rgba(249,231,235,.55), transparent 55%),
+        linear-gradient(180deg, #fff, #f6f7f5);
+      position:relative;
+      overflow-x:hidden;
+      font-family: "Cormorant Garamond", ui-serif, Georgia, serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* textura subtil tipo papel */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        repeating-radial-gradient(circle at 10% 10%,
+          rgba(0,0,0,.016) 0 1px,
+          rgba(0,0,0,0) 1px 6px);
+      mix-blend-mode:multiply;
+      opacity:.55;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 18px 70px;
+      position:relative;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    header.hero{
+      padding: 30px 22px 22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .kicker{
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: rgba(91,107,96,.9);
+      font-size: 12px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      margin: 4px 0 12px;
+    }
+
+    h1{
+      margin: 0;
+      font-family: "Allura", cursive;
+      font-size: clamp(54px, 7vw, 92px);
+      line-height: 1.02;
+      color: var(--sage);
+      letter-spacing: .2px;
+    }
+
+    .date{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing:.3px;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .divider{
+      width: 140px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(244,214,221,.95), rgba(145,168,141,.75), transparent);
+      margin: 18px auto 0;
+      border-radius: 99px;
+    }
+
+    .grid{
+      display:grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (min-width: 840px){
+      .grid{ grid-template-columns: 1.1fr .9fr; }
+    }
+
+    .section{ padding: 22px; }
+    .section h2{
+      margin: 0 0 10px;
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--ink);
+      letter-spacing:.2px;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .message{
+      display:flex;
+      gap: 16px;
+      align-items:center;
+    }
+    .message p{
+      margin:0;
+      font-size: 18px;
+      line-height: 1.65;
+      color: #233027;
+    }
+
+    .dove{
+      width: 170px;
+      min-width: 120px;
+      max-width: 190px;
+      height:auto;
+      filter: drop-shadow(0 14px 20px rgba(18,25,20,.12));
+      opacity:.98;
+      border-radius: 16px;
+    }
+
+    @media (max-width: 520px){
+      .message{ flex-direction:column; }
+      .dove{ width: 155px; }
+      .section{ padding: 20px; }
+      .message p{ font-size: 17.2px; }
+    }
+
+    .infoRow{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .pill{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.58)),
+        radial-gradient(500px 260px at 10% 10%, rgba(244,214,221,.35), transparent 60%),
+        radial-gradient(540px 300px at 90% 40%, rgba(145,168,141,.20), transparent 60%);
+      border: 1px solid rgba(145,168,141,.26);
+      border-radius: 18px;
+      padding: 14px 14px;
+    }
+    .pill .label{
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing:.24em;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .pill .value{
+      font-size: 18px;
+      line-height: 1.35;
+      color: #1f2a22;
+      font-weight: 500;
+    }
+
+    .timePlace{ display:grid; gap: 10px; }
+    .timePlace strong{ font-weight: 600; color: #1e2a21; }
+
+    .miniBtns{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .countdown{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .cdBox{
+      text-align:center;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(244,214,221,.55);
+      border-radius: 18px;
+      padding: 14px 10px;
+    }
+    .cdBox .num{
+      font-size: 28px;
+      font-weight: 650;
+      color: #1f2a22;
+      letter-spacing:.3px;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .cdBox .txt{
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing:.26em;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .rsvpNote{
+      margin: 10px 0 14px;
+      font-size: 17px;
+      color: #2a3a2f;
+      line-height: 1.55;
+    }
+
+    .btns{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none;
+      border: 1px solid rgba(145,168,141,.42);
+      background: white;
+      color: #1f2a22;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 15.5px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      box-shadow: 0 10px 22px rgba(18,25,20,.08);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(145,168,141,.75);
+      box-shadow: 0 16px 30px rgba(18,25,20,.10);
+    }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(244,214,221,.50), rgba(244,214,221,.18));
+      border-color: rgba(244,214,221,.95);
+    }
+    .btn.map{
+      background: linear-gradient(180deg, rgba(145,168,141,.18), rgba(145,168,141,.08));
+    }
+    .btn small{
+      color: var(--muted);
+      font-size: 12px;
+      display:block;
+      line-height:1.1;
+      letter-spacing:.08em;
+    }
+
+    footer{
+      text-align:center;
+      margin-top: 18px;
+      color: rgba(31,42,34,.7);
+      font-size: 14px;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Fade-in geral */
+    .reveal{
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .9s ease, transform .9s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* OVERLAY: nuvem real a esfumar (canvas) */
+    .cloudOverlay{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(1000px 700px at 50% 35%, rgba(255,255,255,.98), rgba(255,255,255,.84)),
+        radial-gradient(900px 600px at 30% 85%, rgba(244,214,221,.35), transparent 60%);
+      overflow:hidden;
+    }
+    .cloudStage{
+      width: min(860px, 92vw);
+      aspect-ratio: 16/9;
+      position:relative;
+      filter: drop-shadow(0 26px 44px rgba(18,25,20,.12));
+    }
+    canvas#fog{
+      width:100%;
+      height:100%;
+      display:block;
+      border-radius: 30px;
+    }
+    .cloudHint{
+      position:absolute;
+      left:0; right:0; bottom: 14px;
+      text-align:center;
+      font-family: "Allura", cursive;
+      color: rgba(31,42,34,.58);
+      font-size: 30px;
+      letter-spacing:.2px;
+      user-select:none;
+      pointer-events:none;
+      text-shadow: 0 8px 20px rgba(18,25,20,.06);
+    }
+
+    /* Dissolve: esfumando + fade do overlay */
+    .cloudOverlay.dissolve{
+      animation: overlayFade 1.8s ease forwards;
+    }
+    .cloudOverlay.dissolve .cloudStage{
+      animation: stageLift 1.8s ease forwards;
+    }
+    @keyframes overlayFade{ to{ opacity:0; visibility:hidden; } }
+    @keyframes stageLift{
+      to{
+        transform: translateY(-10px) scale(1.03);
+        filter: blur(9px) drop-shadow(0 26px 44px rgba(18,25,20,0));
+        opacity: 0;
+      }
+    }
+
+    /* Acessibilidade / desempenho: reduz movimento */
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ transition:none; }
+      .cloudOverlay, .cloudStage{ animation:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Nuvem inicial (realista com partículas) -->
+  <div class="cloudOverlay" id="cloud">
+    <div class="cloudStage" aria-hidden="true">
+      <canvas id="fog" width="1280" height="720"></canvas>
+      <div class="cloudHint">Batizado da Olívia</div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- Ponto 1 -->
+    <header class="hero card reveal" id="top">
+      <div class="kicker">Convite</div>
+      <h1>Batizado da Olívia</h1>
+      <p class="date">02 de junho de 2026</p>
+      <div class="divider"></div>
+    </header>
+
+    <section class="grid">
+      <!-- Ponto 2 -->
+      <div class="section card reveal">
+        <h2>Mensagem</h2>
+        <div class="message">
+          <picture>
+            <source srcset="pomba.webp" type="image/webp">
+            <img class="dove" src="pomba.png" alt="Pomba em aguarela" />
+          </picture>
+          <p>
+            É com o coração cheio de alegria, que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
+            Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
+            A vossa presença tornará este dia ainda mais especial, por isso contamos convosco! 🤍
+          </p>
+        </div>
+      </div>
+
+      <!-- Ponto 3 + Mapas -->
+      <div class="section card reveal">
+        <h2>Detalhes</h2>
+
+        <div class="infoRow">
+          <div class="pill">
+            <div class="label">Cerimónia</div>
+            <div class="value timePlace">
+              <div><strong>11h30</strong></div>
+              <div>Igreja Matriz de Tentúgal</div>
+            </div>
+            <div class="miniBtns">
+              <a class="btn map" id="mapIgreja" href="#" target="_blank" rel="noopener">Google Maps</a>
+            </div>
+          </div>
+
+          <div class="pill">
+            <div class="label">Celebração</div>
+            <div class="value timePlace">
+              <div><strong>Almoço no Salão de Festas</strong></div>
+              <div>Patinhos</div>
+            </div>
+            <div class="miniBtns">
+              <a class="btn map" id="mapPatinhos" href="#" target="_blank" rel="noopener">Google Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ponto 4 -->
+        <div style="margin-top:14px;">
+          <div class="pill">
+            <div class="label">Contagem decrescente</div>
+            <div class="countdown" id="countdown" aria-label="Contagem decrescente">
+              <div class="cdBox"><div class="num" id="d">—</div><div class="txt">Dias</div></div>
+              <div class="cdBox"><div class="num" id="h">—</div><div class="txt">Horas</div></div>
+              <div class="cdBox"><div class="num" id="m">—</div><div class="txt">Min</div></div>
+              <div class="cdBox"><div class="num" id="s">—</div><div class="txt">Seg</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ponto 5 -->
+    <section class="section card reveal" style="margin-top:16px;">
+      <h2>Confirmação de presença</h2>
+      <p class="rsvpNote">
+        Confirma a tua presença até <strong>31 de março</strong> através do WhatsApp:
+      </p>
+
+      <div class="btns">
+        <a class="btn primary" id="btnPai" href="#" target="_blank" rel="noopener">
+          <span>Confirmar com o Pai<br><small>915 149 673</small></span>
+        </a>
+
+        <a class="btn" id="btnMae" href="#" target="_blank" rel="noopener">
+          <span>Confirmar com a Mãe<br><small>914 188 636</small></span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="reveal">Com carinho 🤍</footer>
+  </main>
+
+  <script>
+    /* ========= NUVEM “REAL” (canvas partículas + blur) ========= */
+    const cloud = document.getElementById('cloud');
+    const canvas = document.getElementById('fog');
+    const ctx = canvas.getContext('2d', { alpha: true });
+
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function fitCanvas(){
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    window.addEventListener('resize', fitCanvas, { passive:true });
+
+    const puffs = [];
+    let PUFFS = 70;
+    function rand(a,b){ return a + Math.random()*(b-a); }
+
+    function isMobile(){
+      return Math.min(window.innerWidth, window.innerHeight) < 700;
+    }
+
+    function makePuff(){
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: rand(rect.width*0.18, rect.width*0.82),
+        y: rand(rect.height*0.30, rect.height*0.72),
+        r: rand(rect.width*0.08, rect.width*0.16),
+        vx: rand(-0.055, 0.055),
+        vy: rand(-0.018, 0.028),
+        a: rand(0.14, 0.30),
+        wob: rand(0, Math.PI*2),
+        wobSpd: rand(0.003, 0.010),
+        grow: rand(0.002, 0.008),
+      };
+    }
+
+    function initFog(){
+      fitCanvas();
+      puffs.length = 0;
+
+      // Mobile: menos partículas e blur mais leve => animação mais fluida
+      PUFFS = isMobile() ? 48 : 70;
+
+      for(let i=0;i<PUFFS;i++) puffs.push(makePuff());
+    }
+
+    let dissolving = false;
+    let dissolveStart = 0;
+
+    function draw(now){
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+
+      ctx.clearRect(0,0,w,h);
+
+      // Dissolve progress (0->1)
+      let dp = 0;
+      if(dissolving){
+        dp = Math.min(1, (now - dissolveStart) / 1400);
+      }
+
+      ctx.save();
+      const blur = reduceMotion ? 0 : (isMobile() ? 12 : 14);
+      ctx.filter = blur ? `blur(${blur}px)` : 'none';
+
+      for(const p of puffs){
+        p.wob += p.wobSpd;
+        p.x += p.vx + Math.sin(p.wob)*0.04;
+        p.y += p.vy + Math.cos(p.wob)*0.02;
+
+        const rr = p.r * (1 + dp*0.55) + dp*90*p.grow;
+        const yy = p.y - dp*28;
+
+        if(p.x < -rr) p.x = w + rr;
+        if(p.x > w + rr) p.x = -rr;
+        if(p.y < -rr) p.y = h + rr;
+        if(p.y > h + rr) p.y = -rr;
+
+        const alpha = Math.max(0, p.a * (1 - dp*1.25));
+        if(alpha <= 0.001) continue;
+
+        const g = ctx.createRadialGradient(p.x, yy, rr*0.15, p.x, yy, rr);
+        g.addColorStop(0, `rgba(255,255,255,${alpha})`);
+        g.addColorStop(0.65, `rgba(255,255,255,${alpha*0.75})`);
+        g.addColorStop(1, `rgba(255,255,255,0)`);
+
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, yy, rr, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+
+      // glow suave
+      if(!reduceMotion){
+        ctx.save();
+        ctx.globalCompositeOperation = "screen";
+        const glow = ctx.createRadialGradient(w*0.50, h*0.52, 20, w*0.50, h*0.52, w*0.42);
+        glow.addColorStop(0, `rgba(255,255,255,${0.20*(1-dp)})`);
+        glow.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = glow;
+        ctx.fillRect(0,0,w,h);
+        ctx.restore();
+      }
+
+      if(!reduceMotion) requestAnimationFrame(draw);
+    }
+
+    initFog();
+    if(!reduceMotion) requestAnimationFrame(draw);
+
+    /* ========= REVEAL DO CONTEÚDO ========= */
+    const revealEls = Array.from(document.querySelectorAll('.reveal'));
+    function showContent(){
+      revealEls.forEach((el, i) => {
+        setTimeout(() => el.classList.add('show'), 120 + i * 110);
+      });
+    }
+
+    // Nuvem dura 2.5s antes de esfumar
+    setTimeout(() => {
+      dissolving = true;
+      dissolveStart = performance.now();
+      cloud.classList.add('dissolve');
+
+      setTimeout(() => {
+        cloud.remove();
+        showContent();
+      }, 1800);
+
+    }, 2500);
+
+    /* ========= COUNTDOWN ========= */
+    const target = new Date("2026-06-02T11:30:00");
+    const $d = document.getElementById('d');
+    const $h = document.getElementById('h');
+    const $m = document.getElementById('m');
+    const $s = document.getElementById('s');
+    const pad = n => String(n).padStart(2,'0');
+
+    function tick(){
+      const now = new Date();
+      let diff = target - now;
+      if(diff <= 0){
+        $d.textContent="00"; $h.textContent="00"; $m.textContent="00"; $s.textContent="00";
+        return;
+      }
+      const total = Math.floor(diff/1000);
+      const days = Math.floor(total/86400);
+      const hours = Math.floor((total%86400)/3600);
+      const mins = Math.floor((total%3600)/60);
+      const secs = total%60;
+      $d.textContent = pad(days);
+      $h.textContent = pad(hours);
+      $m.textContent = pad(mins);
+      $s.textContent = pad(secs);
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    /* ========= WHATSAPP ========= */
+    const pai = "351915149673";
+    const mae = "351914188636";
+    const msg = encodeURIComponent(
+      "Olá! 😊 Confirmo a minha presença no Batizado da Olívia (02/06/2026). " +
+      "Número de pessoas: _____. Obrigado/a!"
+    );
+    document.getElementById('btnPai').href = `https://wa.me/${pai}?text=${msg}`;
+    document.getElementById('btnMae').href = `https://wa.me/${mae}?text=${msg}`;
+
+    /* ========= GOOGLE MAPS ========= */
+    const qIgreja = encodeURIComponent("Igreja Matriz de Tentúgal");
+    const qPatinhos = encodeURIComponent("Salão de Festas Patinhos, Carapinheira");
+    document.getElementById('mapIgreja').href = `https://www.google.com/maps/search/?api=1&query=${qIgreja}`;
+    document.getElementById('mapPatinhos').href = `https://www.google.com/maps/search/?api=1&query=${qPatinhos}`;
+  </script>
+</body>
+</html>
