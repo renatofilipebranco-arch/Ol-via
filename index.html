@@ -38,7 +38,7 @@ html,body{
  opacity:0;
  filter:blur(12px);
  transform:scale(.97);
- transition:opacity .8s ease,filter .8s ease,transform .8s ease;
+ transition:opacity .9s ease,filter .9s ease,transform .9s ease;
 }
 
 .page.active{
@@ -73,8 +73,8 @@ h2{
  position:absolute;
  inset:0;
  background:url('pomba.webp') no-repeat center 20%;
- background-size:400px;
- opacity:.15;
+ background-size:420px;
+ opacity:.18;
  pointer-events:none;
 }
 
@@ -128,16 +128,29 @@ h2{
  font-size:16px;
 }
 
+/* Nuvem visível e lenta */
 .cloud{
  position:fixed;
  inset:0;
- background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.95),rgba(255,255,255,.7)),
-            radial-gradient(circle at 60% 50%,rgba(255,255,255,.8),transparent 60%);
+ background:
+ radial-gradient(circle at 40% 40%,rgba(255,255,255,.95),transparent 60%),
+ radial-gradient(circle at 60% 50%,rgba(255,255,255,.85),transparent 65%),
+ radial-gradient(circle at 50% 60%,rgba(255,255,255,.75),transparent 70%),
+ linear-gradient(#ffffff,#ffffff);
+ animation:cloudMove 6s ease-in-out infinite alternate;
  z-index:9999;
- transition:opacity 2s ease;
+ transition:opacity 2.5s ease;
 }
 
-.cloud.hide{opacity:0;pointer-events:none;}
+@keyframes cloudMove{
+ 0%{background-position:40% 40%,60% 50%,50% 60%,0 0;}
+ 100%{background-position:45% 42%,55% 48%,52% 63%,0 0;}
+}
+
+.cloud.hide{
+ opacity:0;
+ pointer-events:none;
+}
 </style>
 </head>
 
@@ -145,12 +158,12 @@ h2{
 
 <div class="cloud" id="cloud"></div>
 
-<div class="page active" id="p0">
+<div class="page active">
 <h1>Batizado da Olívia</h1>
 <p>02 de junho de 2026</p>
 </div>
 
-<div class="page" id="p1">
+<div class="page">
 <div class="watermark"></div>
 <div class="text">
 É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
@@ -159,7 +172,7 @@ A vossa presença tornará este dia ainda mais especial 🤍
 </div>
 </div>
 
-<div class="page" id="p2">
+<div class="page">
 <h2>Detalhes</h2>
 <div class="text">
 <strong>11h30</strong><br>
@@ -169,7 +182,7 @@ Patinhos
 </div>
 </div>
 
-<div class="page" id="p3">
+<div class="page">
 <h2>Confirmação</h2>
 <div class="countdown">
 <div><span id="d">--</span>d</div>
@@ -192,7 +205,6 @@ Patinhos
 <script>
 let index=0;
 const pages=document.querySelectorAll('.page');
-let autoTimer;
 let pauseUntil=0;
 
 function show(i){
@@ -210,20 +222,27 @@ function auto(){
  if(Date.now()>pauseUntil){
    show(index+1);
  }
- autoTimer=setTimeout(auto,6000);
+ setTimeout(auto,7000);
 }
 auto();
 
-['pointerdown','wheel','touchstart','keydown'].forEach(e=>{
+let startY=null;
+window.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;});
+window.addEventListener('touchend',e=>{
+ if(startY===null)return;
+ let diff=e.changedTouches[0].clientY-startY;
+ if(Math.abs(diff)>50){go(diff<0?1:-1);}
+ startY=null;
+});
+
+['pointerdown','wheel','keydown'].forEach(e=>{
  window.addEventListener(e,()=>pauseUntil=Date.now()+45000);
 });
 
-// Cloud
 setTimeout(()=>{
  document.getElementById('cloud').classList.add('hide');
-},2500);
+},4000);
 
-// Countdown
 const target=new Date("2026-06-02T11:30:00");
 function tick(){
  const now=new Date();
@@ -241,7 +260,6 @@ function tick(){
 setInterval(tick,1000);
 tick();
 
-// WhatsApp
 const msg=encodeURIComponent("Olá! Confirmo a presença no Batizado da Olívia. Confirma até 31 de Março.");
 document.getElementById('btnPai').href="https://wa.me/351915149673?text="+msg;
 document.getElementById('btnMae').href="https://wa.me/351914188636?text="+msg;
