@@ -13,47 +13,71 @@
  --blush:#e3a8b5;
  --ink:#1f2a22;
 }
+
 *{box-sizing:border-box;}
 html,body{
  margin:0;
  height:100%;
  overflow:hidden;
  font-family:'Inter',sans-serif;
- background:linear-gradient(180deg,#ffffff,#f7f7f5);
+ background:#ffffff;
  color:var(--ink);
 }
 
-/* INTRO POMBA */
+/* INTRO */
 .intro{
  position:fixed;
  inset:0;
  display:flex;
  align-items:center;
  justify-content:center;
- background:radial-gradient(circle at center, #ffffff 0%, #f9f9f7 80%);
+ background:#ffffff;
  z-index:9999;
+}
+
+.glow{
+ position:absolute;
+ width:60vw;
+ height:60vw;
+ background:radial-gradient(circle, rgba(255,255,255,.9), transparent 70%);
+ filter:blur(60px);
+ opacity:0;
+ animation:glowPulse 2.5s ease 1s forwards;
+}
+
+@keyframes glowPulse{
+ 0%{ opacity:0; }
+ 100%{ opacity:.8; }
 }
 
 .intro img{
  width:min(420px,70vw);
  opacity:0;
- animation:doveAppear 2.5s ease forwards;
+ animation:doveIn 2s ease forwards;
 }
 
-@keyframes doveAppear{
- 0%{ opacity:0; transform:scale(.8); }
+@keyframes doveIn{
+ 0%{ opacity:0; transform:scale(.85); }
  100%{ opacity:1; transform:scale(1); }
 }
 
-.intro.fadeOut{
- animation:introFade 2s ease 4s forwards;
+.whiteFlash{
+ position:fixed;
+ inset:0;
+ background:#ffffff;
+ opacity:0;
+ pointer-events:none;
 }
 
-@keyframes introFade{
- to{ opacity:0; visibility:hidden; }
+.whiteFlash.active{
+ animation:whiteFade 1.2s ease forwards;
 }
 
-/* PAGE */
+@keyframes whiteFade{
+ to{ opacity:1; }
+}
+
+/* PAGES */
 .page{
  position:absolute;
  inset:0;
@@ -64,11 +88,15 @@ html,body{
  text-align:center;
  padding:40px 25px;
  opacity:0;
- animation:contentFade 2s ease 4.5s forwards;
 }
 
-@keyframes contentFade{
- to{ opacity:1; }
+.page.show{
+ animation:contentReveal 1.4s ease forwards;
+}
+
+@keyframes contentReveal{
+ 0%{ opacity:0; transform:scale(.98); }
+ 100%{ opacity:1; transform:scale(1); }
 }
 
 .page::before{
@@ -80,6 +108,8 @@ html,body{
  opacity:.08;
  pointer-events:none;
 }
+
+.page-main::before{ opacity:.16; }
 
 h1{
  font-family:'Allura',cursive;
@@ -101,16 +131,67 @@ h1{
  font-size:19px;
  line-height:1.85;
 }
+
+.details{
+ font-size:18px;
+ line-height:1.6;
+}
+
+.countdown{
+ margin-top:20px;
+ font-size:20px;
+}
+
+.btnRow{
+ margin-top:25px;
+ display:flex;
+ gap:15px;
+ flex-wrap:wrap;
+ justify-content:center;
+}
+
+.btn{
+ padding:14px 22px;
+ border-radius:14px;
+ text-decoration:none;
+ font-weight:600;
+}
+
+.pai{ background:rgba(145,168,141,.35); }
+.mae{ background:rgba(244,214,221,.7); }
+
+.nav{
+ position:fixed;
+ bottom:15px;
+ left:0;
+ right:0;
+ display:flex;
+ justify-content:center;
+ gap:20px;
+}
+
+.arrow{
+ border:none;
+ background:rgba(0,0,0,.05);
+ width:36px;
+ height:36px;
+ border-radius:50%;
+ cursor:pointer;
+ font-size:16px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="intro" id="intro">
+ <div class="glow"></div>
  <img src="pomba.png" alt="Pomba branca">
 </div>
 
-<section class="page">
+<div class="whiteFlash" id="whiteFlash"></div>
+
+<section class="page page-main" id="page1">
  <h1>Batizado da Olívia</h1>
  <div class="sub">02 de Maio de 2026</div>
  <div class="text">
@@ -120,11 +201,67 @@ h1{
  </div>
 </section>
 
+<section class="page" id="page2">
+ <h1 style="font-size:40px;">Detalhes</h1>
+ <div class="details">
+ <strong>11h30</strong><br>
+ Igreja Matriz de Tentúgal<br><br>
+ <strong>Almoço</strong><br>
+ Patinhos
+ </div>
+</section>
+
+<section class="page" id="page3">
+ <h1 style="font-size:40px;">Confirmação</h1>
+ <div class="countdown" id="countdown"></div>
+ <div class="btnRow">
+   <a class="btn pai" href="https://wa.me/351915149673" target="_blank">Confirmar com o Pai</a>
+   <a class="btn mae" href="https://wa.me/351914188636" target="_blank">Confirmar com a Mãe</a>
+ </div>
+ <p style="margin-top:15px;">Confirma até <strong>31 de Março</strong></p>
+</section>
+
+<div class="nav">
+ <button class="arrow" onclick="change(-1)">‹</button>
+ <button class="arrow" onclick="change(1)">›</button>
+</div>
+
 <script>
-// Fade out intro container
+// Cinematic intro sequence
 setTimeout(()=>{
- document.getElementById('intro').classList.add('fadeOut');
+ document.getElementById('whiteFlash').classList.add('active');
 }, 3500);
+
+setTimeout(()=>{
+ document.getElementById('intro').style.display="none";
+ document.getElementById('page1').classList.add('show');
+}, 4700);
+
+// Paging
+let pages=document.querySelectorAll('.page');
+let index=0;
+
+function change(step){
+ pages[index].classList.remove('show');
+ index=(index+step+pages.length)%pages.length;
+ pages[index].classList.add('show');
+}
+
+// Countdown
+const target=new Date("2026-05-02T11:30:00");
+function updateCountdown(){
+ const now=new Date();
+ const diff=target-now;
+ if(diff<=0) return;
+ const d=Math.floor(diff/1000/60/60/24);
+ const h=Math.floor(diff/1000/60/60)%24;
+ const m=Math.floor(diff/1000/60)%60;
+ const s=Math.floor(diff/1000)%60;
+ document.getElementById('countdown').innerHTML =
+  d+" dias "+h+"h "+m+"m "+s+"s";
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
 </script>
 
 </body>
