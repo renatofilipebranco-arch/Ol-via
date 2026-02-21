@@ -11,287 +11,393 @@
 
 <style>
 :root{
- --sage:#91a88d;
- --blush:#f4d6dd;
- --blush2:#f9e7eb;
- --ink:#1f2a22;
+  --sage:#91a88d;
+  --blush:#f4d6dd;
+  --blush2:#f9e7eb;
+  --ink:#1f2a22;
+  --muted:#5b6b60;
 }
-
 *{box-sizing:border-box;}
 html,body{
- margin:0;
- height:100%;
- overflow:hidden;
- font-family:'Inter',sans-serif;
- background:
-   radial-gradient(900px 650px at 85% 22%, rgba(244,214,221,.55), transparent 58%),
-   radial-gradient(900px 700px at 15% 10%, rgba(145,168,141,.22), transparent 55%),
-   linear-gradient(180deg,#fff,#f8f8f6);
- color:var(--ink);
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+  background:
+    radial-gradient(900px 650px at 85% 22%, rgba(244,214,221,.62), transparent 58%),
+    radial-gradient(900px 700px at 15% 10%, rgba(145,168,141,.22), transparent 55%),
+    linear-gradient(180deg,#fff,#f7f7f5);
+  color:var(--ink);
 }
-
-/* IMPORTANTE: páginas invisíveis não recebem clique */
+/* páginas invisíveis não recebem clique */
 .page{
- position:absolute;
- inset:0;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- text-align:center;
- padding:44px 24px;
- opacity:0;
- pointer-events:none;
- filter:blur(12px);
- transform:scale(.97);
- transition:opacity .9s ease,filter .9s ease,transform .9s ease;
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:44px 22px;
+  opacity:0;
+  pointer-events:none;
+  filter:blur(12px);
+  transform:scale(.97);
+  transition:opacity .9s ease,filter .9s ease,transform .9s ease;
 }
-
 .page.active{
- opacity:1;
- pointer-events:auto;
- filter:blur(0);
- transform:scale(1);
+  opacity:1;
+  pointer-events:auto;
+  filter:blur(0);
+  transform:scale(1);
 }
 
+/* Marca de água (pomba) em TODAS as páginas */
+.page::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: url('pomba.png') no-repeat center 18%;
+  background-size: min(520px, 82vw);
+  opacity:.10;
+  pointer-events:none;
+  transform: rotate(-6deg);
+  filter: brightness(1.15) saturate(.9);
+}
+.page > *{ position:relative; z-index:1; }
+
+/* Tipografia */
 h1{
- font-family:'Allura',cursive;
- font-size:clamp(52px,9vw,96px);
- color:var(--sage);
- margin:0;
- line-height:1;
+  font-family:'Allura',cursive;
+  font-size:clamp(52px,9vw,96px);
+  color:var(--sage);
+  margin:0 0 18px;   /* mais espaço */
+  line-height:1;
 }
-
 .sub{
- margin-top:10px;
- font-size:16px;
- color:rgba(0,0,0,.55);
+  margin-top:-6px;
+  margin-bottom:18px;
+  font-size:15px;
+  color:rgba(31,42,34,.62);
+  letter-spacing:.02em;
 }
-
 h2{
- font-weight:500;
- letter-spacing:.1em;
- text-transform:uppercase;
- font-size:13px;
- margin:0 0 18px;
- color:rgba(0,0,0,.52);
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:12px;
+  margin:0 0 18px;
+  color:rgba(91,107,96,.88);
 }
-
 .text{
- max-width:720px;
- font-size:18px;
- line-height:1.7;
+  max-width:740px;
+  font-size:18px;
+  line-height:1.75;
+  color:rgba(31,42,34,.88);
 }
 
-.watermark{
- position:absolute;
- inset:0;
- background:url('pomba.png') no-repeat center 18%;
- background-size:min(520px, 82vw);
- opacity:.14;
- pointer-events:none;
- transform: rotate(-6deg);
+/* Detalhes mais ricos */
+.detailWrap{
+  width:min(740px, 100%);
+  display:grid;
+  gap:12px;
+  margin-top:6px;
 }
+.pill{
+  text-align:left;
+  padding:16px 16px;
+  border-radius:18px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.56)),
+    radial-gradient(320px 200px at 18% 18%, rgba(244,214,221,.42), transparent 62%),
+    radial-gradient(320px 200px at 86% 22%, rgba(145,168,141,.18), transparent 62%);
+  border:1px solid rgba(145,168,141,.18);
+  box-shadow: 0 16px 40px rgba(18,25,20,.06);
+}
+.pill .lbl{
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(91,107,96,.86);
+  margin-bottom:8px;
+}
+.pill .val{
+  font-size:18px;
+  color:rgba(31,42,34,.90);
+  line-height:1.35;
+}
+.pill .val strong{ font-weight:600; color:rgba(31,42,34,.96); }
 
+/* Countdown */
 .countdown{
- display:flex;
- gap:14px;
- margin-top:18px;
- font-size:20px;
- flex-wrap:wrap;
- justify-content:center;
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.countdown .cd{
+  min-width: 86px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.56)),
+    radial-gradient(240px 150px at 20% 20%, rgba(244,214,221,.45), transparent 62%);
+  border:1px solid rgba(145,168,141,.16);
+  box-shadow: 0 12px 26px rgba(18,25,20,.05);
+}
+.countdown .num{
+  display:block;
+  font-weight:600;
+  font-size:22px;
+  color:rgba(31,42,34,.92);
+}
+.countdown .unit{
+  display:block;
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(91,107,96,.82);
+  margin-top:4px;
 }
 
-.countdown div{
- padding:12px 16px;
- border-radius:14px;
- background:
-   linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55)),
-   radial-gradient(220px 140px at 20% 20%, rgba(244,214,221,.42), transparent 62%);
- border:1px solid rgba(145,168,141,.18);
-}
-
+/* Botões */
 .btnRow{
- margin-top:22px;
- display:flex;
- gap:14px;
- flex-wrap:wrap;
- justify-content:center;
+  margin-top:22px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
-
 .btn{
- padding:14px 20px;
- border-radius:14px;
- text-decoration:none;
- color:#1a1a1a;
- font-weight:500;
- min-width: 190px;
+  padding:14px 20px;
+  border-radius:16px;
+  text-decoration:none;
+  color:#1a1a1a;
+  font-weight:600;
+  min-width: 200px;
+  box-shadow: 0 14px 30px rgba(18,25,20,.08);
+}
+.pai{
+  background:linear-gradient(180deg, rgba(145,168,141,.34), rgba(145,168,141,.14));
+  border:1px solid rgba(145,168,141,.35);
+}
+.mae{
+  background:linear-gradient(180deg, rgba(244,214,221,.78), rgba(244,214,221,.30));
+  border:1px solid rgba(244,214,221,.65);
 }
 
-.pai{background:linear-gradient(180deg, rgba(145,168,141,.33), rgba(145,168,141,.14)); border:1px solid rgba(145,168,141,.35);}
-.mae{background:linear-gradient(180deg, rgba(244,214,221,.75), rgba(244,214,221,.30)); border:1px solid rgba(244,214,221,.65);}
-
+/* Navegação */
 .nav{
- position:fixed;
- bottom:14px;
- left:0;
- right:0;
- display:flex;
- justify-content:center;
- gap:16px;
- z-index:10;
+  position:fixed;
+  bottom:14px;
+  left:0; right:0;
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  z-index:10;
 }
-
 .arrow{
- border:none;
- background:rgba(0,0,0,.045);
- width:34px;
- height:34px;
- border-radius:999px;
- cursor:pointer;
- font-size:16px;
+  border:none;
+  background:rgba(0,0,0,.045);
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:16px;
 }
 
-/* Nuvem celestial */
+/* ===== NUVEM (Canvas + tons rosa) ===== */
 .cloud{
- position:fixed;
- inset:0;
- z-index:9999;
- background:
-   radial-gradient(900px 680px at 40% 42%, rgba(255,255,255,1), rgba(255,255,255,0) 60%),
-   radial-gradient(860px 640px at 55% 60%, rgba(249,231,235,.9), rgba(249,231,235,0) 70%),
-   radial-gradient(760px 560px at 55% 35%, rgba(244,214,221,.75), rgba(244,214,221,0) 72%),
-   linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,1));
- animation: cloudFloat 5.5s ease-in-out infinite alternate;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  background:
+    radial-gradient(1100px 800px at 50% 35%, rgba(255,255,255,.95), rgba(255,255,255,.86)),
+    radial-gradient(900px 600px at 35% 70%, rgba(244,214,221,.34), transparent 62%),
+    radial-gradient(900px 600px at 70% 60%, rgba(145,168,141,.10), transparent 62%);
 }
-
-@keyframes cloudFloat{
- 0%{ transform: scale(1); }
- 100%{ transform: scale(1.03); }
+#fog{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
 }
-
-.cloud.dissolve{ animation: cloudDissolve 2.6s ease forwards; }
-
-@keyframes cloudDissolve{
- 0%{ opacity:1; filter:blur(0px); }
- 50%{ opacity:1; filter:blur(10px); }
- 100%{ opacity:0; filter:blur(22px); }
+.cloud.dissolve{ animation: cloudFade 2.7s ease forwards; }
+@keyframes cloudFade{
+  0%{ opacity:1; }
+  40%{ opacity:1; }
+  100%{ opacity:0; }
 }
 </style>
 </head>
 
 <body>
+<div class="cloud" id="cloud"><canvas id="fog"></canvas></div>
 
-<div class="cloud" id="cloud"></div>
-
-<section class="page active">
- <div class="watermark"></div>
- <h1>Batizado da Olívia</h1>
- <div class="sub">02 de junho de 2026</div>
- <div style="height:18px"></div>
- <div class="text">
-  É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
-  Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
-  A vossa presença tornará este dia ainda mais especial 🤍
- </div>
+<section class="page active" aria-label="Convite e Mensagem">
+  <h1>Batizado da Olívia</h1>
+  <div class="sub">02 de junho de 2026</div>
+  <div class="text">
+    É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
+    Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
+    A vossa presença tornará este dia ainda mais especial 🤍
+  </div>
 </section>
 
-<section class="page">
- <h2>Detalhes</h2>
- <div class="text">
-  <strong>11h30</strong><br>
-  Igreja Matriz de Tentúgal<br><br>
-  <strong>Almoço</strong><br>
-  Patinhos
- </div>
+<section class="page" aria-label="Detalhes">
+  <h2>Detalhes</h2>
+  <div class="detailWrap">
+    <div class="pill">
+      <div class="lbl">Cerimónia</div>
+      <div class="val"><strong>11h30</strong><br>Igreja Matriz de Tentúgal</div>
+    </div>
+    <div class="pill">
+      <div class="lbl">Celebração</div>
+      <div class="val"><strong>Almoço</strong><br>Patinhos</div>
+    </div>
+  </div>
 </section>
 
-<section class="page">
- <h2>Confirmação</h2>
- <div class="countdown">
-  <div><span id="d">--</span>d</div>
-  <div><span id="h">--</span>h</div>
-  <div><span id="m">--</span>m</div>
-  <div><span id="s">--</span>s</div>
- </div>
- <div class="btnRow">
-  <a class="btn pai" id="btnPai" href="#">Confirmar com o Pai</a>
-  <a class="btn mae" id="btnMae" href="#">Confirmar com a Mãe</a>
- </div>
- <p style="margin-top:14px;font-size:13px;">Confirma até <strong>31 de Março</strong></p>
+<section class="page" aria-label="Confirmação">
+  <h2>Confirmação</h2>
+  <div class="countdown" aria-label="Contagem decrescente">
+    <div class="cd"><span class="num" id="d">--</span><span class="unit">Dias</span></div>
+    <div class="cd"><span class="num" id="h">--</span><span class="unit">Horas</span></div>
+    <div class="cd"><span class="num" id="m">--</span><span class="unit">Min</span></div>
+    <div class="cd"><span class="num" id="s">--</span><span class="unit">Seg</span></div>
+  </div>
+  <div class="btnRow">
+    <a class="btn pai" id="btnPai" href="#">Confirmar com o Pai</a>
+    <a class="btn mae" id="btnMae" href="#">Confirmar com a Mãe</a>
+  </div>
+  <p style="margin-top:14px;font-size:13px;color:rgba(91,107,96,.90);">Confirma até <strong>31 de Março</strong></p>
 </section>
 
-<div class="nav">
- <button class="arrow" id="prevBtn">‹</button>
- <button class="arrow" id="nextBtn">›</button>
+<div class="nav" aria-label="Navegação">
+  <button class="arrow" id="prevBtn" type="button">‹</button>
+  <button class="arrow" id="nextBtn" type="button">›</button>
 </div>
 
 <script>
 let index=0;
 const pages=[...document.querySelectorAll('.page')];
 let pauseUntil=0;
-
 function show(i){
- pages[index].classList.remove('active');
- index=(i+pages.length)%pages.length;
- pages[index].classList.add('active');
+  pages[index].classList.remove('active');
+  index=(i+pages.length)%pages.length;
+  pages[index].classList.add('active');
 }
-
 function go(step){
- pauseUntil=Date.now()+45000;
- show(index+step);
+  pauseUntil=Date.now()+45000;
+  show(index+step);
 }
-
-document.getElementById('prevBtn').onclick=()=>go(-1);
-document.getElementById('nextBtn').onclick=()=>go(1);
-
+document.getElementById('prevBtn').addEventListener('click',()=>go(-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(1));
 function auto(){
- if(Date.now()>pauseUntil) show(index+1);
- setTimeout(auto,7000);
+  if(Date.now()>pauseUntil) show(index+1);
+  setTimeout(auto,7000);
 }
 auto();
-
 ['pointerdown','wheel','keydown','touchstart'].forEach(e=>{
- window.addEventListener(e,()=>pauseUntil=Date.now()+45000,{passive:true});
+  window.addEventListener(e,()=>pauseUntil=Date.now()+45000,{passive:true});
 });
-
 let startY=null;
 window.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;},{passive:true});
 window.addEventListener('touchend',e=>{
- if(startY===null) return;
- const diff=e.changedTouches[0].clientY-startY;
- if(Math.abs(diff)>50) go(diff<0?1:-1);
- startY=null;
+  if(startY===null) return;
+  const diff=e.changedTouches[0].clientY-startY;
+  if(Math.abs(diff)>50) go(diff<0?1:-1);
+  startY=null;
 },{passive:true});
 
-// Cloud timing
+/* Cloud canvas */
 const cloud=document.getElementById('cloud');
-setTimeout(()=>cloud.classList.add('dissolve'),4500);
-setTimeout(()=>cloud.remove(),7100);
+const canvas=document.getElementById('fog');
+const ctx=canvas.getContext('2d', { alpha:true });
+function fit(){
+  const dpr=Math.max(1, Math.min(2, window.devicePixelRatio||1));
+  canvas.width = Math.floor(window.innerWidth*dpr);
+  canvas.height = Math.floor(window.innerHeight*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize', fit, {passive:true});
+fit();
+function rand(a,b){ return a+Math.random()*(b-a); }
+const isMobile = Math.min(window.innerWidth, window.innerHeight) < 700;
+const PUFFS = isMobile ? 90 : 160;
+const puffs=[];
+for(let i=0;i<PUFFS;i++){
+  puffs.push({
+    x: rand(-240, window.innerWidth+240),
+    y: rand(window.innerHeight*0.06, window.innerHeight*0.94),
+    r: rand(160, 420),
+    vx: rand(-0.15, 0.15),
+    vy: rand(-0.05, 0.05),
+    a: rand(0.14, 0.28),
+    rose: Math.random() < 0.58
+  });
+}
+let dissolving=false;
+let t0=performance.now();
+function draw(t){
+  const w=window.innerWidth, h=window.innerHeight;
+  ctx.clearRect(0,0,w,h);
+  const dp = dissolving ? Math.min(1, (t - t0)/2400) : 0;
+  ctx.save();
+  ctx.filter = isMobile ? 'blur(14px)' : 'blur(18px)';
+  for(const p of puffs){
+    p.x += p.vx; p.y += p.vy;
+    if(p.x < -p.r) p.x = w + p.r;
+    if(p.x > w + p.r) p.x = -p.r;
+    if(p.y < -p.r) p.y = h + p.r;
+    if(p.y > h + p.r) p.y = -p.r;
+    const rr = p.r * (1 + dp*0.60);
+    const alpha = Math.max(0, p.a * (1 - dp*1.20));
+    const g = ctx.createRadialGradient(p.x, p.y, rr*0.14, p.x, p.y, rr);
+    if(p.rose){
+      g.addColorStop(0, `rgba(244,214,221,${alpha})`);
+      g.addColorStop(0.55, `rgba(255,255,255,${alpha*0.78})`);
+    }else{
+      g.addColorStop(0, `rgba(255,255,255,${alpha})`);
+      g.addColorStop(0.55, `rgba(255,255,255,${alpha*0.82})`);
+    }
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, rr, 0, Math.PI*2);
+    ctx.fill();
+  }
+  ctx.restore();
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+setTimeout(()=>{ dissolving=true; t0=performance.now(); cloud.classList.add('dissolve'); }, 4800);
+setTimeout(()=> cloud.remove(), 4800+2700);
 
-// Countdown
+/* Countdown */
 const target=new Date("2026-06-02T11:30:00");
 function pad(n){return String(n).padStart(2,'0');}
 function tick(){
- const now=new Date();
- let diff=(target-now)/1000;
- if(diff<0) diff=0;
- const d=Math.floor(diff/86400);
- const h=Math.floor(diff%86400/3600);
- const m=Math.floor(diff%3600/60);
- const s=Math.floor(diff%60);
- document.getElementById('d').textContent=d;
- document.getElementById('h').textContent=pad(h);
- document.getElementById('m').textContent=pad(m);
- document.getElementById('s').textContent=pad(s);
+  const now=new Date();
+  let diff=(target-now)/1000; if(diff<0) diff=0;
+  const d=Math.floor(diff/86400);
+  const h=Math.floor(diff%86400/3600);
+  const m=Math.floor(diff%3600/60);
+  const s=Math.floor(diff%60);
+  document.getElementById('d').textContent=d;
+  document.getElementById('h').textContent=pad(h);
+  document.getElementById('m').textContent=pad(m);
+  document.getElementById('s').textContent=pad(s);
 }
-tick();
-setInterval(tick,1000);
+tick(); setInterval(tick,1000);
 
+/* WhatsApp */
 const msg=encodeURIComponent("Olá! 😊 Confirmo a presença no Batizado da Olívia (02/06/2026). Confirma até 31 de Março. Número de pessoas: _____. Obrigado/a!");
 document.getElementById('btnPai').href="https://wa.me/351915149673?text="+msg;
 document.getElementById('btnMae').href="https://wa.me/351914188636?text="+msg;
 </script>
-
 </body>
 </html>
