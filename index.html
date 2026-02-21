@@ -33,7 +33,7 @@ html,body{
  background:
    radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,1) 70%);
  z-index:9999;
- animation: fadeOut 4s ease 5s forwards;
+ animation: fadeOut 5s ease 6s forwards;
 }
 
 .cloudGlow{
@@ -41,13 +41,13 @@ html,body{
  width:80vw;
  height:80vw;
  background:radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
- filter:blur(60px);
+ filter:blur(80px); opacity:.7;
 }
 
 .cloudIntro img{
  width:min(750px,85vw);
  opacity:.9;
- filter: saturate(.6) brightness(1.15) blur(1px);
+ filter: saturate(.5) brightness(1.2) blur(2px);
  animation: float 7s ease-in-out infinite alternate;
 }
 
@@ -77,25 +77,31 @@ html,body{
 .page.active{ opacity:1; }
 
 .page::before{
+  opacity:.08;
+}
+.page-main::before{
+  opacity:.22;
+}
+.page::before{
  content:"";
  position:absolute;
  inset:0;
  background:url('pomba.png') no-repeat center 20%;
  background-size:min(520px,80vw);
- opacity:.2;
+ opacity:.08;
  pointer-events:none;
 }
 
 h1{
  font-family:'Allura',cursive;
- font-size:clamp(52px,9vw,96px);
+ font-size:clamp(56px,9vw,100px); letter-spacing:.02em;
  color:var(--sage);
  margin:0 0 20px;
 }
 
 .sub{ font-size:16px; margin-bottom:25px; }
 
-.text{ max-width:720px; font-size:18px; line-height:1.7; }
+.text{ max-width:720px; font-size:19px; line-height:1.85; letter-spacing:.01em; }
 
 .details{ margin-top:20px; font-size:18px; line-height:1.6; }
 
@@ -141,6 +147,12 @@ h1{
  cursor:pointer;
  font-size:16px;
 }
+
+@keyframes dateFade {
+  0% { opacity:0; transform:translateY(10px); }
+  100% { opacity:1; transform:translateY(0); }
+}
+
 </style>
 </head>
 
@@ -151,9 +163,9 @@ h1{
  <img src="cloud.png" alt="Nuvem suave rosa">
 </div>
 
-<section class="page active">
+<section class="page active page-main">
  <h1>Batizado da Olívia</h1>
- <div class="sub">02 de junho de 2026</div>
+ <div class="sub" style="color:#e3a8b5;font-weight:600;font-size:18px;letter-spacing:.04em;opacity:0;animation:dateFade 2s ease 1.5s forwards;">02 de junho de 2026</div>
  <div class="text">
  É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
  Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
