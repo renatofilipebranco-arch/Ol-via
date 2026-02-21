@@ -13,39 +13,47 @@
  --blush:#f4d6dd;
  --ink:#1f2a22;
 }
-
 *{box-sizing:border-box;}
 html,body{
  margin:0;
  height:100%;
  overflow:hidden;
  font-family:'Inter',sans-serif;
- background:linear-gradient(180deg,#fff,#f7f7f5);
+ background:linear-gradient(180deg,#ffffff,#f7f7f5);
  color:var(--ink);
 }
 
-/* CLOUD INTRO */
+/* INTRO NUVEM */
 .cloudIntro{
  position:fixed;
  inset:0;
  display:flex;
  align-items:center;
  justify-content:center;
- background:white;
+ background:
+   radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(255,255,255,1) 70%);
  z-index:9999;
- animation: fadeOut 3s ease 4s forwards;
+ animation: fadeOut 4s ease 5s forwards;
+}
+
+.cloudGlow{
+ position:absolute;
+ width:80vw;
+ height:80vw;
+ background:radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
+ filter:blur(60px);
 }
 
 .cloudIntro img{
- width:min(700px,85vw);
- opacity:.95;
- filter: blur(2px);
- animation: float 6s ease-in-out infinite alternate;
+ width:min(750px,85vw);
+ opacity:.9;
+ filter: saturate(.6) brightness(1.15) blur(1px);
+ animation: float 7s ease-in-out infinite alternate;
 }
 
 @keyframes float{
  from{ transform:translateY(0px) scale(1); }
- to{ transform:translateY(-15px) scale(1.03); }
+ to{ transform:translateY(-18px) scale(1.04); }
 }
 
 @keyframes fadeOut{
@@ -62,15 +70,19 @@ html,body{
  align-items:center;
  text-align:center;
  padding:40px 25px;
+ opacity:0;
+ transition:opacity 1s ease;
 }
+
+.page.active{ opacity:1; }
 
 .page::before{
  content:"";
  position:absolute;
  inset:0;
  background:url('pomba.png') no-repeat center 20%;
- background-size:min(500px,80vw);
- opacity:.18;
+ background-size:min(520px,80vw);
+ opacity:.2;
  pointer-events:none;
 }
 
@@ -81,15 +93,53 @@ h1{
  margin:0 0 20px;
 }
 
-.sub{
- font-size:16px;
- margin-bottom:25px;
+.sub{ font-size:16px; margin-bottom:25px; }
+
+.text{ max-width:720px; font-size:18px; line-height:1.7; }
+
+.details{ margin-top:20px; font-size:18px; line-height:1.6; }
+
+.countdown{
+ margin-top:20px;
+ font-size:20px;
 }
 
-.text{
- max-width:720px;
- font-size:18px;
- line-height:1.7;
+.btnRow{
+ margin-top:25px;
+ display:flex;
+ gap:15px;
+ flex-wrap:wrap;
+ justify-content:center;
+}
+
+.btn{
+ padding:14px 22px;
+ border-radius:14px;
+ text-decoration:none;
+ font-weight:600;
+}
+
+.pai{ background:rgba(145,168,141,.35); }
+.mae{ background:rgba(244,214,221,.7); }
+
+.nav{
+ position:fixed;
+ bottom:15px;
+ left:0;
+ right:0;
+ display:flex;
+ justify-content:center;
+ gap:20px;
+}
+
+.arrow{
+ border:none;
+ background:rgba(0,0,0,.05);
+ width:36px;
+ height:36px;
+ border-radius:50%;
+ cursor:pointer;
+ font-size:16px;
 }
 </style>
 </head>
@@ -97,18 +147,75 @@ h1{
 <body>
 
 <div class="cloudIntro">
-  <img src="cloud.png" alt="Nuvem rosa suave">
+ <div class="cloudGlow"></div>
+ <img src="cloud.png" alt="Nuvem suave rosa">
 </div>
 
-<section class="page">
-  <h1>Batizado da Olívia</h1>
-  <div class="sub">02 de junho de 2026</div>
-  <div class="text">
-    É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
-    Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
-    A vossa presença tornará este dia ainda mais especial 🤍
-  </div>
+<section class="page active">
+ <h1>Batizado da Olívia</h1>
+ <div class="sub">02 de junho de 2026</div>
+ <div class="text">
+ É com o coração cheio de alegria que vos convidamos para o Batizado da nossa querida Olívia.<br><br>
+ Um momento de fé, amor e gratidão pela sua vida, em que pediremos a Deus que a acompanhe e proteja sempre.<br><br>
+ A vossa presença tornará este dia ainda mais especial 🤍
+ </div>
 </section>
+
+<section class="page">
+ <h1 style="font-size:40px;">Detalhes</h1>
+ <div class="details">
+ <strong>11h30</strong><br>
+ Igreja Matriz de Tentúgal<br><br>
+ <strong>Almoço</strong><br>
+ Patinhos
+ </div>
+</section>
+
+<section class="page">
+ <h1 style="font-size:40px;">Confirmação</h1>
+ <div class="countdown" id="countdown"></div>
+ <div class="btnRow">
+   <a class="btn pai" href="https://wa.me/351915149673" target="_blank">Confirmar com o Pai</a>
+   <a class="btn mae" href="https://wa.me/351914188636" target="_blank">Confirmar com a Mãe</a>
+ </div>
+ <p style="margin-top:15px;">Confirma até <strong>31 de Março</strong></p>
+</section>
+
+<div class="nav">
+ <button class="arrow" onclick="change(-1)">‹</button>
+ <button class="arrow" onclick="change(1)">›</button>
+</div>
+
+<script>
+let pages=document.querySelectorAll('.page');
+let index=0;
+
+function change(step){
+ pages[index].classList.remove('active');
+ index=(index+step+pages.length)%pages.length;
+ pages[index].classList.add('active');
+}
+
+const target=new Date("2026-06-02T11:30:00");
+function updateCountdown(){
+ const now=new Date();
+ const diff=target-now;
+ if(diff<=0) return;
+ const d=Math.floor(diff/1000/60/60/24);
+ const h=Math.floor(diff/1000/60/60)%24;
+ const m=Math.floor(diff/1000/60)%60;
+ const s=Math.floor(diff/1000)%60;
+ document.getElementById('countdown').innerHTML =
+  d+" dias "+h+"h "+m+"m "+s+"s";
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+// Show first page after cloud disappears
+setTimeout(()=>{
+ document.querySelectorAll('.page')[0].classList.add('active');
+},9000);
+</script>
 
 </body>
 </html>
