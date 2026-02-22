@@ -318,7 +318,7 @@ async function tryAutoplayMuted(){
 tryAutoplayMuted();
 
 // Unmute & fade-in on first user interaction (mobile policy)
-function enableSoundOnce(){
+function enableSoundOnce(ev){
   music.muted = false;
   setIcon();
   music.play().then(()=>{
@@ -338,9 +338,10 @@ btn.addEventListener("click", async ()=>{
   music.muted = !music.muted;
   setIcon();
   if(!music.muted){
-    // gentle fade in when turning on
-    if(music.volume < 0.05) music.volume = 0.0;
-    fadeTo(TARGET_VOL, 1800);
+    music.play().then(()=>{
+      if(music.volume < 0.05) music.volume = 0.0;
+      fadeTo(TARGET_VOL, 1800);
+    }).catch(()=>{});
   }else{
     // don't hard cut, fade down slightly then mute is already true
     fadeTo(0.0, 700);
