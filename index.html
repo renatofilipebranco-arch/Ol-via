@@ -225,6 +225,21 @@ h1{
  <img src="pomba.png" alt="Pomba branca">
 </div>
 
+<div id="tapHint" style="
+position:fixed;
+bottom:70px;
+left:0;
+right:0;
+text-align:center;
+font-size:14px;
+letter-spacing:.05em;
+color:rgba(0,0,0,.55);
+opacity:0;
+transition:opacity .8s ease;
+z-index:50;">
+Toca no ecrã para ouvir a música 🤍
+</div>
+
 <button class="musicBtn" id="musicBtn" aria-label="Som ligado/desligado" title="Som">🔊</button>
 <audio id="bgMusic" autoplay loop muted playsinline>
   <source src="musica.mp3" type="audio/mpeg">
@@ -420,6 +435,25 @@ function updateCountdown(){
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
+</script>
+
+
+<script>
+const tapHint = document.getElementById("tapHint");
+
+// Show hint shortly after reveal
+setTimeout(()=>{
+  if(music && music.muted){
+    tapHint.style.opacity = "1";
+  }
+}, 5000);
+
+// Hide hint when sound activates
+function hideHint(){
+  tapHint.style.opacity = "0";
+}
+document.addEventListener("click", hideHint, { once:true });
+document.addEventListener("touchstart", hideHint, { once:true });
 </script>
 
 </body>
