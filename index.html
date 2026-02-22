@@ -225,25 +225,35 @@ h1{
  <img src="pomba.png" alt="Pomba branca">
 </div>
 
-<div id="tapHint" style="
-position:fixed;
-bottom:calc(86px + env(safe-area-inset-bottom));
-left:0;
-right:0;
-text-align:center; pointer-events:none;
-font-size:14px;
-letter-spacing:.05em;
-color:rgba(0,0,0,.55);
-opacity:0;
-transition:opacity .8s ease;
-z-index:50;">
-<span style="display:inline-block;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(6px);border:1px solid rgba(0,0,0,.06);">Toca no ecrã para ouvir a música 🤍</span>
-</div>
-
 <button class="musicBtn" id="musicBtn" aria-label="Som ligado/desligado" title="Som">🔊</button>
 <audio id="bgMusic" autoplay loop muted playsinline>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
+
+<div id="soundGate" style="
+position:fixed;
+inset:0;
+z-index:100;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+padding-bottom:calc(86px + env(safe-area-inset-bottom));
+pointer-events:auto;
+background:transparent;">
+  <div style="
+    font-size:14px;
+    letter-spacing:.05em;
+    color:rgba(0,0,0,.60);
+    background:rgba(255,255,255,.76);
+    border:1px solid rgba(0,0,0,.06);
+    border-radius:999px;
+    padding:10px 14px;
+    backdrop-filter: blur(6px);
+    opacity:0;
+    transition:opacity .8s ease;
+  " id="soundGatePill">Toca para ativar o som 🔊</div>
+</div>
+
 
 <section class="page page-main" id="page1">
  <h1>Batizado da Olívia</h1>
@@ -348,6 +358,49 @@ btn.addEventListener("click", async ()=>{
   }
 });
 
+
+// Sound gate overlay (Android-friendly)
+const gate = document.getElementById("soundGate");
+const gatePill = document.getElementById("soundGatePill");
+
+function showGate(){
+  if(!gate) return;
+  // only show if still muted
+  if(music && music.muted){
+    gatePill.style.opacity = "1";
+  } else {
+    gate.style.display = "none";
+  }
+}
+
+// After intro reveal finishes (~4500 + 1600), show the pill
+setTimeout(showGate, 6600);
+
+function enableSoundFromGate(){
+  // This click is a direct user gesture: safest place to unmute
+  music.play().then(()=>{
+    music.muted = false;
+    setIcon();
+    music.volume = 0.0;
+    fadeTo(TARGET_VOL, 2200);
+  }).catch(()=>{
+    // even if play fails, keep gate so user can try again
+    return;
+  });
+  // remove gate regardless (or keep until unmuted?). We'll remove once unmuted on next tick.
+  setTimeout(()=>{
+    if(!music.muted){
+      gatePill.style.opacity = "0";
+      setTimeout(()=> gate.remove(), 400);
+    }
+  }, 50);
+}
+
+if(gate){
+  gate.addEventListener("click", enableSoundFromGate);
+  gate.addEventListener("touchstart", enableSoundFromGate, { passive:true });
+}
+
 /* ===== Pages + intro + auto + swipe ===== */
 const pages = [...document.querySelectorAll(".page")];
 let index = 0;
@@ -440,26 +493,7 @@ updateCountdown();
 
 
 <script>
-const tapHint = document.getElementById("tapHint");
 
-// Show hint shortly after reveal
-setTimeout(()=>{
-  const introEl = document.getElementById("intro");
-  const introGone = !introEl || introEl.style.display === "none";
-  if(music && music.muted && introGone){
-    tapHint.style.opacity = "1";
-  } else if(music && music.muted){
-    // try again shortly if intro still fading
-    setTimeout(()=>{ if(music.muted) tapHint.style.opacity="1"; }, 900);
-  }
-}, 7000);
-// Hide hint when sound activates
-function hideHint(){
-  tapHint.style.opacity = "0";
-}
-document.addEventListener("click", hideHint, { once:true });
-document.addEventListener("touchstart", hideHint, { once:true });
-</script>
 
 </body>
 </html>
