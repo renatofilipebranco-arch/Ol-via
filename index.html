@@ -63,7 +63,9 @@ html,body{
  justify-content:center;
  align-items:center;
  text-align:center;
- padding:40px 25px calc(120px + env(safe-area-inset-bottom));
+ padding:48px 24px calc(92px + env(safe-area-inset-bottom));
+ overflow-y:auto;
+ -webkit-overflow-scrolling:touch;
  opacity:0;
  pointer-events:none;
  transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
@@ -206,6 +208,13 @@ h1{
   .musicBtn{ bottom:10px; right:10px; width:40px; height:40px; }
 }
 
+
+@media (max-height: 740px){
+  h1{ margin:0 0 14px; }
+  .sub{ margin-bottom:18px; }
+  .text{ font-size:18px; line-height:1.75; }
+}
+
 </style>
 </head>
 
@@ -217,7 +226,7 @@ h1{
 </div>
 
 <button class="musicBtn" id="musicBtn" aria-label="Som ligado/desligado" title="Som">🔊</button>
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" autoplay loop muted playsinline>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -261,16 +270,16 @@ h1{
 </div>
 
 <script>
-/* ===== Music: autoplay + toggle + fade-in + sync ===== */
+/* ===== Music: autoplay (muted) + unmute on first interaction + toggle + fade-in + sync ===== */
 const music = document.getElementById("bgMusic");
 const btn = document.getElementById("musicBtn");
 const TARGET_VOL = 0.35;
 
 function setIcon(){ btn.textContent = music.muted ? "🔇" : "🔊"; }
-function fadeIn(durationMs=3000){
+function fadeTo(targetVol, durationMs=2500){
   const start = performance.now();
-  const from = 0, to = TARGET_VOL;
-  music.volume = from;
+  const from = music.volume;
+  const to = targetVol;
   const step = (t)=>{
     const p = Math.min(1, (t-start)/durationMs);
     const s = p*p*(3-2*p);
@@ -280,31 +289,50 @@ function fadeIn(durationMs=3000){
   requestAnimationFrame(step);
 }
 
+// Jump to "nice part"
 music.addEventListener('loadedmetadata', ()=>{ try{ music.currentTime = 38.0; }catch(e){} });
 
-async function tryPlay(){
-  try{
-    await music.play();
-    if(!music.muted) fadeIn(3000);
-  }catch(e){}
-}
+// Start muted for best chance of autoplay on mobile
+music.volume = 0.0;
+music.muted = true;
+setIcon();
 
+async function tryAutoplayMuted(){
+  try{ await music.play(); }catch(e){}
+}
+tryAutoplayMuted();
+
+// Unmute & fade-in on first user interaction (mobile policy)
+function enableSoundOnce(){
+  music.muted = false;
+  setIcon();
+  music.play().then(()=>{
+    // start from 0 and fade up
+    music.volume = 0.0;
+    fadeTo(TARGET_VOL, 2800);
+  }).catch(()=>{});
+  document.removeEventListener('click', enableSoundOnce);
+  document.removeEventListener('touchstart', enableSoundOnce);
+}
+document.addEventListener('click', enableSoundOnce, { once:true });
+document.addEventListener('touchstart', enableSoundOnce, { once:true, passive:true });
+
+// Toggle button
 btn.addEventListener("click", async ()=>{
   try{ await music.play(); }catch(e){}
   music.muted = !music.muted;
-  if(!music.muted) fadeIn(2000);
   setIcon();
+  if(!music.muted){
+    // gentle fade in when turning on
+    if(music.volume < 0.05) music.volume = 0.0;
+    fadeTo(TARGET_VOL, 1800);
+  }else{
+    // don't hard cut, fade down slightly then mute is already true
+    fadeTo(0.0, 700);
+  }
 });
 
-music.muted = false;
-setIcon();
-tryPlay();
-
-document.addEventListener("click", function(){
-  music.play().then(()=>{ if(!music.muted) fadeIn(2500); }).catch(()=>{});
-}, { once:true });
-
-/* ===== Pages + intro + auto + swipe ===== */
+/* ===== Pages + intro + auto + swipe ===== */ + intro + auto + swipe ===== */
 const pages = [...document.querySelectorAll(".page")];
 let index = 0;
 
