@@ -63,7 +63,7 @@ html,body{
  justify-content:center;
  align-items:center;
  text-align:center;
- padding:40px 25px;
+ padding:40px 25px calc(120px + env(safe-area-inset-bottom));
  opacity:0;
  pointer-events:none;
  transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
@@ -199,6 +199,13 @@ h1{
 }
 .mapChurch{ background:rgba(145,168,141,.25); }
 .mapVenue{ background:rgba(244,214,221,.6); }
+
+@media (max-height: 720px){
+  .nav{ bottom:10px; }
+  .arrow{ width:32px; height:32px; font-size:14px; }
+  .musicBtn{ bottom:10px; right:10px; width:40px; height:40px; }
+}
+
 </style>
 </head>
 
@@ -246,9 +253,6 @@ h1{
    <a class="btn mae" id="btnMae" href="#" target="_blank">Confirmar com a Mãe</a>
  </div>
  <p style="margin-top:15px;">Confirma até <strong>31 de Março</strong></p>
-<br>
-
-
 </section>
 
 <div class="nav" aria-label="Navegação">
@@ -389,9 +393,6 @@ function updateCountdown(){
 setInterval(updateCountdown, 1000);
 updateCountdown();
 </script>
-
-
-
 
 </body>
 </html>
